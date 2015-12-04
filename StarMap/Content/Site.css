@@ -45,6 +45,12 @@ input[type="checkbox"].input-validation-error {
     display: block;
     text-decoration: none;
 }
+
 #admin-menu li.active a {
     color: #fff;
+}
+
+#frmChangeLanguage {
+    float: right;
+    padding: 9px 0 0 10px;
 }

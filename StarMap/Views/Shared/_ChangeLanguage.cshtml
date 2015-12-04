@@ -8,7 +8,7 @@
     }
     @:selected="selected"
 }
-@using (Html.BeginForm("SetCulture", "Home"))
+@using (Html.BeginForm("SetCulture", "Home", FormMethod.Post, new { id = "frmChangeLanguage" }))
 {
     <select name="culture" id="cboChangeLanguage" class="form-control">
         <option value="en-us" @Selected("en-us", culture)>English</option>
