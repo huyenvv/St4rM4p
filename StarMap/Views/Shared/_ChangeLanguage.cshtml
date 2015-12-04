@@ -1,0 +1,17 @@
+﻿@using Resources
+@{var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();}
+@helper Selected(string c, string culture)
+{
+    if (c != culture)
+    {
+        return;
+    }
+    @:selected="selected"
+}
+@using (Html.BeginForm("SetCulture", "Home"))
+{
+    <select name="culture" id="cboChangeLanguage" class="form-control">
+        <option value="en-us" @Selected("en-us", culture)>English</option>
+        <option value="vi" @Selected("vi", culture)>Tiếng việt</option>
+    </select>
+}

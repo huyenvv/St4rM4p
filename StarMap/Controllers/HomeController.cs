@@ -2,22 +2,16 @@
 using System.Web;
 using System.Web.Mvc;
 using StarMap.Helpers;
-using StarMap.Models;
 
 namespace StarMap.Controllers
 {
     public class HomeController : BaseController
     {
+        [CustomAuthorize]
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
 
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Index(Person per)
-        {
             return View();
         }
 

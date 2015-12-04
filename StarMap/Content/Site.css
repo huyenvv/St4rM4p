@@ -40,3 +40,11 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+#admin-menu li a {
+    display: block;
+    text-decoration: none;
+}
+#admin-menu li.active a {
+    color: #fff;
+}

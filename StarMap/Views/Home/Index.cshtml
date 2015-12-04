@@ -2,64 +2,9 @@
 @using Resources;
 @{
     ViewBag.Title = Resources.AddPerson;
-    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
-}
-
-@helper Selected(string c, string culture)
-{
-    if (c != culture)
-    {
-        return;
-    }
-    @:checked="checked"
 }
 
 <h2>@Resources.AddPerson</h2>
-
-@using (Html.BeginForm("SetCulture", "Home"))
-{
-    <fieldset>
-        <legend>@Resources.ChooseYourLanguage</legend>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="en-us">
-                    <input name="culture" id="en-us" value="en-us" type="radio" @Selected("en-us", culture) /> English
-                </label>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="es">
-                    <input name="culture" id="es" value="es" type="radio" @Selected("es", culture) /> Español
-                </label>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <div class="controls">
-                <label for="ar">
-                    <input name="culture" id="ar" value="ar" type="radio" @Selected("ar", culture) /> العربية
-                </label>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <div class="controls">
-                <label for="vi">
-                    <input name="culture" id="vi" value="vi" type="radio" @Selected("vi", culture) /> Việt nam
-                </label>
-            </div>
-        </div>
-
-
-    </fieldset>
-
-
-
-
-}
 
 @using (Html.BeginForm())
 {
@@ -120,13 +65,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript">
-        (function ($) {
-            $("input[type = 'radio']").click(function () {
-                $(this).parents("form").submit(); // post form
-            });
-
-        })(jQuery);
-    </script>
 }

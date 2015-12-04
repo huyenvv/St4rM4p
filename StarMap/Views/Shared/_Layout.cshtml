@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Starmap PNJ", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -24,6 +24,7 @@
                     <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+                @Html.Partial("_ChangeLanguage")
             </div>
         </div>
     </div>
@@ -31,12 +32,20 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - StarMap PRJ</p>
         </footer>
     </div>
-
+    <script>
+        function getController() {
+            return "/@(ViewContext.RouteData.Values["controller"] as String)";
+        }
+        function getAction() {
+            return "/@(ViewContext.RouteData.Values["action"] as String)";
+        }
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Starmap.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

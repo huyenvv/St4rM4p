@@ -1,0 +1,59 @@
+﻿@model StarMap.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/FileInput.css" rel="stylesheet" />
+<div class="col-md-3">
+    @Html.Partial("_AdminMenu")
+</div>
+<div class="col-md-9">
+    <h3 class="page-header">@ViewBag.Title</h3>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.Image)
+                <div class="form-group">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail" style="width: 200px;">
+                            <img src="@Model.Image" alt="Alternate Text" width="300" height="200" />
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;
+                            max-height: 150px; line-height: 20px;">
+                        </div>
+                        <div>
+                            <span class="btn btn-file btn-warning">
+                                <span class="fileinput-new">Chọn ảnh</span> <span class="fileinput-exists">Thay đổi</span>
+                                <input type="file" name="imagePathFile" class="default" />
+                            </span>
+                            <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">Xóa ảnh</a>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Image)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back to List", "Index", null, new { Class = "btn btn-default" })
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/fileInput.js"></script>
+    }
+</div>
