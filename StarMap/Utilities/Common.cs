@@ -11,7 +11,7 @@ using System.Text;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace TShirt.Utilities
+namespace StarMap.Utilities
 {
     public class Common
     {

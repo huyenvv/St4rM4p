@@ -269,6 +269,7 @@
     <Content Include="Models\StarMap.edmx.diagram">
       <DependentUpon>StarMap.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\StarMap Publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fileInput.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
