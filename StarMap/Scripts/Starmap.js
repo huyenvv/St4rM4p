@@ -1,4 +1,10 @@
 ﻿(function ($) {
+    $(".confirmDelete").click(function () {
+        if (confirm("Bạn chắc chắn?")) {
+            return true;
+        }
+        return false;
+    });
     $("ul#admin-menu li a").each(function () {
         var item = $(this);
         if ((item.attr('href') + ' ').indexOf(getController() + ' ') != -1 || (item.attr('href') + '/').indexOf(getController() + '/') != -1 || (item.attr('href') + '?').indexOf(getController() + '?') != -1) {

@@ -25,6 +25,7 @@ namespace StarMap.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<GoldPoint> GoldPoint { get; set; }

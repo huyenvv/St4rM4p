@@ -28,7 +28,9 @@ namespace StarMap.Models
         public Nullable<bool> IsHot { get; set; }
         public int CategoryId { get; set; }
         public string CreatedBy { get; set; }
+        public string Lang { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Category Category { get; set; }
     }
 }

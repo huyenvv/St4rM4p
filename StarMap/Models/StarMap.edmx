@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StarMapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StarMapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,42 +23,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Image" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'StarMap.dbo.Event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="200" />
-          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Location" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="ThumbImage" Type="varchar" MaxLength="200" />
-          <Property Name="DetailImage" Type="nvarchar" MaxLength="200" />
-          <Property Name="ThumbDescription" Type="nvarchar" MaxLength="200" />
-          <Property Name="DetailDescription" Type="nvarchar(max)" />
-          <Property Name="PublicDate" Type="datetime" />
-          <Property Name="CreateDate" Type="datetime" Nullable="false" />
-          <Property Name="IsHot" Type="bit" />
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'StarMap.dbo.GoldPoint' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="GoldPoint">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -64,19 +41,33 @@ warning 6002: The table/view 'StarMap.dbo.GoldPoint' does not have a primary key
           <Property Name="IsHot" Type="bit" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GoldPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ThumbImage" Type="varchar" MaxLength="200" />
+          <Property Name="DetailImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ThumbDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="DetailDescription" Type="nvarchar(max)" />
+          <Property Name="PublicDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsHot" Type="bit" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
@@ -90,7 +81,20 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           <Property Name="Rate" Type="int" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Event_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Event_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Event" Type="Self.Event" Multiplicity="*" />
@@ -103,6 +107,18 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GoldPoint_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="GoldPoint" Type="Self.GoldPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldPoint">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GoldPoint_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="GoldPoint" Type="Self.GoldPoint" Multiplicity="*" />
@@ -112,6 +128,18 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
             </Principal>
             <Dependent Role="GoldPoint">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -128,104 +156,104 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StarMapModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Event" EntityType="Self.Event" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Event].[Id] AS [Id], 
-    [Event].[Name] AS [Name], 
-    [Event].[Address] AS [Address], 
-    [Event].[Mobile] AS [Mobile], 
-    [Event].[Location] AS [Location], 
-    [Event].[ThumbImage] AS [ThumbImage], 
-    [Event].[DetailImage] AS [DetailImage], 
-    [Event].[ThumbDescription] AS [ThumbDescription], 
-    [Event].[DetailDescription] AS [DetailDescription], 
-    [Event].[PublicDate] AS [PublicDate], 
-    [Event].[CreateDate] AS [CreateDate], 
-    [Event].[IsHot] AS [IsHot], 
-    [Event].[CategoryId] AS [CategoryId], 
-    [Event].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[Event] AS [Event]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="GoldPoint" EntityType="Self.GoldPoint" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [GoldPoint].[Id] AS [Id], 
-    [GoldPoint].[Name] AS [Name], 
-    [GoldPoint].[Address] AS [Address], 
-    [GoldPoint].[Mobile] AS [Mobile], 
-    [GoldPoint].[Location] AS [Location], 
-    [GoldPoint].[ThumbImage] AS [ThumbImage], 
-    [GoldPoint].[DetailImage] AS [DetailImage], 
-    [GoldPoint].[ThumbDescription] AS [ThumbDescription], 
-    [GoldPoint].[DetailDescription] AS [DetailDescription], 
-    [GoldPoint].[PublicDate] AS [PublicDate], 
-    [GoldPoint].[CreateDate] AS [CreateDate], 
-    [GoldPoint].[IsHot] AS [IsHot], 
-    [GoldPoint].[CategoryId] AS [CategoryId], 
-    [GoldPoint].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[GoldPoint] AS [GoldPoint]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Sale" EntityType="Self.Sale" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sale].[Id] AS [Id], 
-    [Sale].[Name] AS [Name], 
-    [Sale].[Address] AS [Address], 
-    [Sale].[Mobile] AS [Mobile], 
-    [Sale].[Location] AS [Location], 
-    [Sale].[ThumbImage] AS [ThumbImage], 
-    [Sale].[DetailImage] AS [DetailImage], 
-    [Sale].[ThumbDescription] AS [ThumbDescription], 
-    [Sale].[DetailDescription] AS [DetailDescription], 
-    [Sale].[PublicDate] AS [PublicDate], 
-    [Sale].[CreateDate] AS [CreateDate], 
-    [Sale].[Rate] AS [Rate], 
-    [Sale].[CategoryId] AS [CategoryId], 
-    [Sale].[CreatedBy] AS [CreatedBy]
-    FROM [dbo].[Sale] AS [Sale]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoldPoint" EntityType="Self.GoldPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Event_AspNetUsers" Association="Self.FK_Event_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Event_Category" Association="Self.FK_Event_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
+          <AssociationSet Name="FK_GoldPoint_AspNetUsers" Association="Self.FK_GoldPoint_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GoldPoint" EntitySet="GoldPoint" />
+          </AssociationSet>
           <AssociationSet Name="FK_GoldPoint_Category" Association="Self.FK_GoldPoint_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="GoldPoint" EntitySet="GoldPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_AspNetUsers" Association="Self.FK_Sale_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
           <AssociationSet Name="FK_Sale_Category" Association="Self.FK_Sale_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StarMapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StarMapEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="StarMapModel.AspNetUsers" />
+          <EntitySet Name="Category" EntityType="StarMapModel.Category" />
+          <EntitySet Name="Event" EntityType="StarMapModel.Event" />
+          <EntitySet Name="GoldPoint" EntityType="StarMapModel.GoldPoint" />
+          <EntitySet Name="Sale" EntityType="StarMapModel.Sale" />
+          <AssociationSet Name="FK_Event_AspNetUsers" Association="StarMapModel.FK_Event_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldPoint_AspNetUsers" Association="StarMapModel.FK_GoldPoint_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GoldPoint" EntitySet="GoldPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_AspNetUsers" Association="StarMapModel.FK_Sale_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Category" Association="StarMapModel.FK_Event_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldPoint_Category" Association="StarMapModel.FK_GoldPoint_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="GoldPoint" EntitySet="GoldPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Category" Association="StarMapModel.FK_Sale_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="StarMapModel.FK_Event_AspNetUsers" FromRole="AspNetUsers" ToRole="Event" />
+          <NavigationProperty Name="GoldPoint" Relationship="StarMapModel.FK_GoldPoint_AspNetUsers" FromRole="AspNetUsers" ToRole="GoldPoint" />
+          <NavigationProperty Name="Sale" Relationship="StarMapModel.FK_Sale_AspNetUsers" FromRole="AspNetUsers" ToRole="Sale" />
+          </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Event" Relationship="Self.FK_Event_Category" FromRole="Category" ToRole="Event" />
-          <NavigationProperty Name="GoldPoint" Relationship="Self.FK_GoldPoint_Category" FromRole="Category" ToRole="GoldPoint" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Category" FromRole="Category" ToRole="Sale" />
-        </EntityType>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Event" Relationship="StarMapModel.FK_Event_Category" FromRole="Category" ToRole="Event" />
+          <NavigationProperty Name="GoldPoint" Relationship="StarMapModel.FK_GoldPoint_Category" FromRole="Category" ToRole="GoldPoint" />
+          <NavigationProperty Name="Sale" Relationship="StarMapModel.FK_Sale_Category" FromRole="Category" ToRole="Sale" />
+          </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ThumbImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DetailImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThumbDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -234,23 +262,20 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsHot" Type="Boolean" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Event_Category" FromRole="Event" ToRole="Category" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_Event_AspNetUsers" FromRole="Event" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Category" Relationship="StarMapModel.FK_Event_Category" FromRole="Event" ToRole="Category" />
         </EntityType>
         <EntityType Name="GoldPoint">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ThumbImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DetailImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThumbDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -259,23 +284,20 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsHot" Type="Boolean" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_GoldPoint_Category" FromRole="GoldPoint" ToRole="Category" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_GoldPoint_AspNetUsers" FromRole="GoldPoint" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Category" Relationship="StarMapModel.FK_GoldPoint_Category" FromRole="GoldPoint" ToRole="Category" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Location" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="CategoryId" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ThumbImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DetailImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThumbDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -284,12 +306,50 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Rate" Type="Int32" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Sale_Category" FromRole="Sale" ToRole="Category" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_Sale_AspNetUsers" FromRole="Sale" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Category" Relationship="StarMapModel.FK_Sale_Category" FromRole="Sale" ToRole="Category" />
         </EntityType>
+        <Association Name="FK_Event_AspNetUsers">
+          <End Type="StarMapModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="StarMapModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoldPoint_AspNetUsers">
+          <End Type="StarMapModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="StarMapModel.GoldPoint" Role="GoldPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldPoint">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_AspNetUsers">
+          <End Type="StarMapModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="StarMapModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Event_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <End Type="StarMapModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="StarMapModel.Event" Role="Event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -300,8 +360,8 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_GoldPoint_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="GoldPoint" Type="Self.GoldPoint" Multiplicity="*" />
+          <End Type="StarMapModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="StarMapModel.GoldPoint" Role="GoldPoint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -312,8 +372,8 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Type="StarMapModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="StarMapModel.Sale" Role="Sale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="Id" />
@@ -323,100 +383,96 @@ warning 6002: The table/view 'StarMap.dbo.Sale' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StarMapEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Event" EntityType="Self.Event" />
-          <EntitySet Name="GoldPoint" EntityType="Self.GoldPoint" />
-          <EntitySet Name="Sale" EntityType="Self.Sale" />
-          <AssociationSet Name="FK_Event_Category" Association="Self.FK_Event_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Event" EntitySet="Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoldPoint_Category" Association="Self.FK_GoldPoint_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="GoldPoint" EntitySet="GoldPoint" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_Category" Association="Self.FK_Sale_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="StarMapModelStoreContainer" CdmEntityContainer="StarMapEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="StarMapModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="StarMapModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="StarMapModel.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
-                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
-                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
-                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
-                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
+                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
+                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
+                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
+                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GoldPoint">
             <EntityTypeMapping TypeName="StarMapModel.GoldPoint">
               <MappingFragment StoreEntitySet="GoldPoint">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
-                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
-                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
-                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
-                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
+                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
+                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
+                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
+                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sale">
             <EntityTypeMapping TypeName="StarMapModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
-                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
-                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
-                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
-                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PublicDate" ColumnName="PublicDate" />
+                <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
+                <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
+                <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
+                <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

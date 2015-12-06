@@ -129,14 +129,29 @@
   <data name="AgeRequired" xml:space="preserve">
     <value>Age is required</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
   <data name="Biography" xml:space="preserve">
     <value>Biography</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Thay đổi</value>
   </data>
   <data name="ChooseYourLanguage" xml:space="preserve">
     <value>Choose your language</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Thêm mới</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Sửa</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -147,6 +162,9 @@
   <data name="EmailRequired" xml:space="preserve">
     <value>Email is required</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Sự kiện</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
   </data>
@@ -155,6 +173,12 @@
   </data>
   <data name="FirstNameRequired" xml:space="preserve">
     <value>First name is required</value>
+  </data>
+  <data name="GoldPoint" xml:space="preserve">
+    <value>Điểm vàng</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Ảnh</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
@@ -165,13 +189,67 @@
   <data name="LastNameRequired" xml:space="preserve">
     <value>Last name is required</value>
   </data>
+  <data name="List" xml:space="preserve">
+    <value>Danh sách</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>Tên đăng nhập hoặc mật khẩu không đúng</value>
+  </data>
   <data name="LogOff" xml:space="preserve">
-    <value>Log off</value>
+    <value>Thoát</value>
   </data>
   <data name="LogOn" xml:space="preserve">
-    <value>Log on</value>
+    <value>Đăng nhập</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Quản trị</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Register</value>
+    <value>Đăng ký</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Gỡ bỏ</value>
+  </data>
+  <data name="Sale" xml:space="preserve">
+    <value>Bán hàng</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu lại</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Chọn ảnh</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Tên đăng nhập</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="DetailDescription" xml:space="preserve">
+    <value>Mô tả chi tiết</value>
+  </data>
+  <data name="DetailImage" xml:space="preserve">
+    <value>Ảnh lớn</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Tọa độ</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Điện thoại</value>
+  </data>
+  <data name="ThumbDescription" xml:space="preserve">
+    <value>Mô tả ngắn</value>
+  </data>
+  <data name="ThumbImage" xml:space="preserve">
+    <value>Ảnh nhỏ</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Điểm đánh giá</value>
   </data>
 </root>

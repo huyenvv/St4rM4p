@@ -1,8 +1,7 @@
 ﻿@model StarMap.Models.Category
-
+@using Resources
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Resources.Edit;
 }
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />
@@ -18,27 +17,27 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         <div class="form-group">
-            @Html.LabelFor(model => model.Name)
+            <label for="Name">@Resources.Name</label>
             @Html.TextBoxFor(model => model.Name, new { Class = "form-control" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
         <div class="row">
             <div class="col-sm-6">
-                @Html.LabelFor(model => model.Image)
+                <label for="Image">@Resources.Image</label>
                 <div class="form-group">
                     <div class="fileinput fileinput-new" data-provides="fileinput">
                         <div class="fileinput-new thumbnail" style="width: 200px;">
-                            <img src="@Model.Image" alt="Alternate Text" width="300" height="200" />
+                            <img src="@(!string.IsNullOrEmpty(Model.Image) ? Model.Image : Url.Content("~/Upload/thumbnail-default.jpg"))" alt="Alternate Text" width="300" height="200" />
                         </div>
                         <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;
                             max-height: 150px; line-height: 20px;">
                         </div>
                         <div>
                             <span class="btn btn-file btn-warning">
-                                <span class="fileinput-new">Chọn ảnh</span> <span class="fileinput-exists">Thay đổi</span>
+                                <span class="fileinput-new">@Resources.SelectImage</span> <span class="fileinput-exists">@Resources.Change</span>
                                 <input type="file" name="imagePathFile" class="default" />
                             </span>
-                            <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">Xóa ảnh</a>
+                            <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">@Resources.Remove</a>
                         </div>
                     </div>
                 </div>
@@ -47,8 +46,8 @@
         </div>
         <div class="clearfix"></div>
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            @Html.ActionLink("Back to List", "Index", null, new { Class = "btn btn-default" })
+            <input type="submit" value="@Resources.Save" class="btn btn-primary" />
+            @Html.ActionLink(Resources.Back, "Index", null, new { Class = "btn btn-default" })
         </div>
     }
 

@@ -10,6 +10,7 @@
 }
 @using (Html.BeginForm("SetCulture", "Home", FormMethod.Post, new { id = "frmChangeLanguage" }))
 {
+    <input type="hidden" name="returnUrl" value="@Request.RawUrl" />
     <select name="culture" id="cboChangeLanguage" class="form-control">
         <option value="en-us" @Selected("en-us", culture)>English</option>
         <option value="vi" @Selected("vi", culture)>Tiếng việt</option>

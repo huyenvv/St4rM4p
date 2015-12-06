@@ -1,8 +1,8 @@
-﻿@model IEnumerable<StarMap.Models.Category>
-@using Resources           
+﻿@model IEnumerable<StarMap.Models.GoldPoint>
+@using Resources
 
 @{
-    ViewBag.Title = Resources.List;
+    ViewBag.Title = Resources.List + " " + Resources.GoldPoint.ToLower();
 }
 
 <div class="col-md-3">
@@ -18,6 +18,18 @@
             <th>
                 @Resources.Name
             </th>
+            <th>
+                @Resources.Location
+            </th>
+            <th>
+                @Resources.Category
+            </th>
+            <th>
+                @Resources.Address
+            </th>
+            <th>
+                Is Hot
+            </th>
             <th></th>
         </tr>
 
@@ -26,6 +38,18 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsHot)
                 </td>
                 <td>
                     @Html.ActionLink(Resources.Edit, "NewOrEdit", new { id = item.Id }) |

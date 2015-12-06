@@ -23,9 +23,9 @@ namespace StarMap.Helpers
         /// Returns true if the language is a right-to-left language. Otherwise, false.
         /// </summary>      
         public static bool IsRighToLeft()
-        {                      
+        {
             return Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
-                        
+
         }
 
 
@@ -75,10 +75,15 @@ namespace StarMap.Helpers
 
         }
 
-        public static string GetCurrentCulture()
+        public static string GetCurrentCulture(bool getOnlyTwoChar = false)
         {
-            return Thread.CurrentThread.CurrentCulture.Name;
+            var culture = Thread.CurrentThread.CurrentCulture.Name;
+            if (getOnlyTwoChar) return culture.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+            return culture;
         }
+
+
 
         public static string GetCurrentNeutralCulture()
         {

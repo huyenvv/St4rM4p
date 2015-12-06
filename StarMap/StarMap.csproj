@@ -186,7 +186,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\EventController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\GoldPointController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SaleController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -195,6 +204,9 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>StarMap.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
     </Compile>
@@ -232,6 +244,7 @@
     <Compile Include="Utilities\FileUpload.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Upload\thumbnail-default.jpg" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -284,6 +297,16 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Starmap.js" />
     <Content Include="StarMap.sql" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\NewOrEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\GoldPoint\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\GoldPoint\NewOrEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -312,8 +335,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_ChangeLanguage.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\NewOrEdit.cshtml" />
+    <Content Include="Views\Event\NewOrEdit.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Sale\NewOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

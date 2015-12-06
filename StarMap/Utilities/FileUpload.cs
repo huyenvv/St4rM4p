@@ -1,12 +1,13 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 
 namespace StarMap.Utilities
 {
     public class FileUpload
     {
-        public const string ROOT = "/images";
+        public const string ROOT = "/Upload";
         #region Files
         public static string GetExtension(string fileName, out string baseName)
         {
@@ -70,11 +71,26 @@ namespace StarMap.Utilities
 
         public static void CreateFile(HttpPostedFileBase file, out string fullName, bool overrideExists, DateTime? date = null)
         {
-            byte[] binaryData;
-            binaryData = new Byte[file.InputStream.Length];
-            long bytesRead = file.InputStream.Read(binaryData, 0, (int)file.InputStream.Length);
-            file.InputStream.Close();
-            fullName = "data:image/png;base64," + System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
+            if (overrideExists)
+            {
+                CreateFile(file, out fullName, date);
+                return;
+            }
+
+            date = date == null ? DateTime.Now : date;
+            CreateDirectory(date.Value.Year.ToString());
+            string monthDir = date.Value.Year + "/" + date.Value.Month;
+            CreateDirectory(monthDir);
+
+            string fileName = file.FileName;
+            fullName = CreateFullName(fileName, monthDir);
+            while (FileExist(fullName))
+            {
+                fileName = DateTime.Now.Millisecond + "-" + fileName;
+                fullName = CreateFullName(fileName, monthDir);
+            }
+
+            file.SaveAs(HttpContext.Current.Server.MapPath(fullName));
         }
 
         public static void CreateFile(HttpPostedFileBase file, string folder, out string fullName)
@@ -126,28 +142,12 @@ namespace StarMap.Utilities
             }
         }
 
-        public static string CreateFromBase64(string contentBase64)
+        public static void RemoveFile(string fullName)
         {
-            var bytes = Convert.FromBase64String(contentBase64);
-            var date = DateTime.Now;
-            CreateDirectory(date.Year.ToString());
-            string monthDir = date.Year + "/" + date.Month;
-            CreateDirectory(monthDir);
-            string design = monthDir + "/Design";
-            CreateDirectory(design);
-            string filePath = monthDir + string.Format("{0}_{1}_{2}_{3}.jpg", date.Year, date.Month, date.Minute, date.Second);
-            filePath = CreateFullName(filePath, design);
-            while (FileExist(filePath))
+            if (FileExist(fullName))
             {
-                filePath = DateTime.Now.Millisecond + "-" + filePath;
+                System.IO.File.Delete(HttpContext.Current.Server.MapPath(fullName));
             }
-
-            using (var imageFile = new FileStream(HttpContext.Current.Server.MapPath(filePath), FileMode.Create))
-            {
-                imageFile.Write(bytes, 0, bytes.Length);
-                imageFile.Flush();
-            }
-            return filePath;
         }
         #endregion
 

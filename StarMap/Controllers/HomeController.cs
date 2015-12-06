@@ -10,12 +10,10 @@ namespace StarMap.Controllers
         [CustomAuthorize]
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            return View();
+            return RedirectToAction("Index", "Category");
         }
 
-        public ActionResult SetCulture(string culture)
+        public ActionResult SetCulture(string culture, string returnUrl = "")
         {
             // Validate input
             culture = CultureHelper.GetImplementedCulture(culture);
@@ -35,7 +33,8 @@ namespace StarMap.Controllers
             }
             Response.Cookies.Add(cookie);
 
-            return RedirectToAction("Index");
+            returnUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : Url.Action("Index");
+            return Redirect(returnUrl);
         }
     }
 }
