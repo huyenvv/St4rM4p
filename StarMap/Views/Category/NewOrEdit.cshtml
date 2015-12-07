@@ -1,7 +1,7 @@
 ﻿@model StarMap.Models.Category
 @using Resources
 @{
-    ViewBag.Title = Resources.Edit;
+    ViewBag.Title = (Model.Id != 0 ? Resources.Edit : Resources.Create) + " " + Resources.Category;
 }
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />

@@ -81,8 +81,12 @@ namespace StarMap.Controllers
             {
                 return HttpNotFound();
             }
+            var image = category.Image;
+
             _db.Category.Remove(category);
             await _db.SaveChangesAsync();
+            // Remove Image
+            FileUpload.RemoveFile(image);
             return RedirectToAction("Index");
         }
 

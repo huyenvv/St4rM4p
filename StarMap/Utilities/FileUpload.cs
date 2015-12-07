@@ -78,9 +78,9 @@ namespace StarMap.Utilities
             }
 
             date = date == null ? DateTime.Now : date;
-            CreateDirectory(date.Value.Year.ToString());
+            CreateDirectory(date.Value.Year.ToString(), true);
             string monthDir = date.Value.Year + "/" + date.Value.Month;
-            CreateDirectory(monthDir);
+            CreateDirectory(monthDir, true);
 
             string fileName = file.FileName;
             fullName = CreateFullName(fileName, monthDir);
@@ -169,6 +169,7 @@ namespace StarMap.Utilities
                 {
                     if (dir != null && dir[0] != '/') dir = '/' + dir;
                     System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(ROOT + dir));
+                    return;
                 }
             }
             System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(dir));
