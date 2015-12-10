@@ -36,5 +36,10 @@ namespace StarMap.Controllers
             returnUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : Url.Action("Index");
             return Redirect(returnUrl);
         }
+
+        public ActionResult ShowAllApi()
+        {
+            return View();
+        }
     }
 }

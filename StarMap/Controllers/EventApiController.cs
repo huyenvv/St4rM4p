@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using StarMap.Models;
@@ -16,9 +17,10 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public IQueryable<EventModel> GetEvent()
+        public List<EventModel> GetEvent()
         {
-            return _db.Event.Select(m => m.ToEventModel());
+            var data = _db.Event.ToList();
+            return data.Count > 0 ? data.Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
         }
 
         // GET api/EventApi/5

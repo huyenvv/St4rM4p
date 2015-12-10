@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using StarMap.Models;
@@ -11,9 +12,10 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/SaleApi
-        public IQueryable<SaleModel> GetSale()
+        public List<SaleModel> GetSale()
         {
-            return _db.Sale.Select(m => m.ToSaleModel());
+            var data = _db.Sale.ToList();
+            return data.Count > 0 ? data.Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>();
         }
 
         // GET api/SaleApi/5

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using StarMap.Models;
@@ -11,9 +12,11 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/GoldPointApi
-        public IQueryable<GoldPointModel> GetGoldPoint()
+        public List<GoldPointModel> GetGoldPoint()
         {
-            return _db.GoldPoint.Select(m => m.ToGoldPointModel());
+            var data = _db.GoldPoint.ToList();
+            return data.Count > 0 ? data.Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>();
+
         }
 
         // GET api/GoldPointApi/5
