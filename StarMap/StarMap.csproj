@@ -186,13 +186,22 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\EventApiController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\EventController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\GoldPointApiController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\GoldPointController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SaleApiController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\SaleController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -213,6 +222,16 @@
     <Compile Include="Models\Event.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GeneralModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GoldPointModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Models\GoldPoint.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
     </Compile>

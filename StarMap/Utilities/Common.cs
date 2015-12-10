@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
+using StarMap.Models;
 
 namespace StarMap.Utilities
 {
@@ -220,6 +221,57 @@ namespace StarMap.Utilities
             }
 
             return ret;
+        }
+
+        public static GoldPointModel ToGoldPointModel(this GoldPoint model)
+        {
+            return new GoldPointModel
+            {
+                Id = model.Id,
+                Address = model.Address,
+                DetailDescription = model.DetailDescription,
+                DetailImage = model.DetailImage,
+                IsHot = model.IsHot,
+                Location = model.Location,
+                Mobile = model.Mobile,
+                Name = model.Name,
+                ThumbDescription = model.ThumbDescription,
+                ThumbImage = model.ThumbImage
+            };
+        }
+
+        public static EventModel ToEventModel(this Event model)
+        {
+            return new EventModel
+            {
+                Id = model.Id,
+                Address = model.Address,
+                DetailDescription = model.DetailDescription,
+                DetailImage = model.DetailImage,
+                IsHot = model.IsHot,
+                Location = model.Location,
+                Mobile = model.Mobile,
+                Name = model.Name,
+                ThumbDescription = model.ThumbDescription,
+                ThumbImage = model.ThumbImage
+            };
+        }
+
+        public static SaleModel ToSaleModel(this Sale model)
+        {
+            return new SaleModel
+            {
+                Id = model.Id,
+                Address = model.Address,
+                DetailDescription = model.DetailDescription,
+                DetailImage = model.DetailImage,
+                Rate = model.Rate,
+                Location = model.Location,
+                Mobile = model.Mobile,
+                Name = model.Name,
+                ThumbDescription = model.ThumbDescription,
+                ThumbImage = model.ThumbImage
+            };
         }
     }
 
