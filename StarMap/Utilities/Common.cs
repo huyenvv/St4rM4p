@@ -202,13 +202,39 @@ namespace StarMap.Utilities
                 return null;
             }
         }
+
+        public static int GetPaging(int page, int pageSize, int total)
+        {
+            int val;
+            int pages = 1;
+            if (total != 0)
+            {
+                pages = ((total - 1) / pageSize) + 1;
+            }
+            if (total < pageSize)
+            {
+                val = 0;
+            }
+            else
+            {
+                if (page < pages)
+                {
+                    val = (page - 1) * pageSize;
+                }
+                else
+                {
+                    val = (pages - 1) * pageSize;
+                }
+            }
+            return val;
+        }
     }
     public static class Cultures
     {
         public static readonly CultureInfo UnitedKingdom =
             CultureInfo.ReadOnly(new CultureInfo("en-US"));
     }
-    
+
     public static class Extensions
     {
         public static string AppSetting(this string key)
@@ -273,6 +299,75 @@ namespace StarMap.Utilities
                 ThumbImage = model.ThumbImage
             };
         }
+
+        public static CategoryModel ToCategoryModel(this Category model)
+        {
+            return new CategoryModel
+            {
+                Id = model.Id,
+                Name = model.Name
+            };
+        }
+
     }
 
+    public static class GoogleHelpers
+    {
+        const double PIx = 3.141592653589793;
+        const double Radio = 6378.16;
+
+        /// <summary>
+        /// This class cannot be instantiated.
+        /// </summary>
+
+        /// <summary>
+        /// Convert degrees to Radians
+        /// </summary>
+        /// <param name="x">Degrees</param>
+        /// <returns>The equivalent in radians</returns>
+        private static double Radians(double x)
+        {
+            return x * PIx / 180;
+        }
+
+        /// <summary>
+        /// Calculate the distance between two places.
+        /// </summary>
+        /// <param name="lon1"></param>
+        /// <param name="lat1"></param>
+        /// <param name="lon2"></param>
+        /// <param name="lat2"></param>
+        /// <returns></returns>
+        private static double DistanceBetweenPlaces(
+            double lon1,
+            double lat1,
+            double lon2,
+            double lat2)
+        {
+            double dlon = Radians(lon2 - lon1);
+            double dlat = Radians(lat2 - lat1);
+
+            double a = (Math.Sin(dlat / 2) * Math.Sin(dlat / 2)) + Math.Cos(Radians(lat1)) * Math.Cos(Radians(lat2)) * (Math.Sin(dlon / 2) * Math.Sin(dlon / 2));
+            double angle = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return (angle * Radio);
+        }
+
+        /// <summary>
+        /// DistanceTwoLocation
+        /// </summary>
+        /// <param name="locationA"></param>
+        /// <param name="locationB"></param>
+        /// <returns>Kilometter</returns>
+        public static double DistanceTwoLocation(string locationA, string locationB)
+        {
+            var lonAndLatA = locationA.Split(new[] { '-', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var lonAndLatB = locationB.Split(new[] { '-', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var lat1 = double.Parse(lonAndLatA[0]);
+            var lon1 = double.Parse(lonAndLatA[1]);
+            var lat2 = double.Parse(lonAndLatB[0]);
+            var lon2 = double.Parse(lonAndLatB[1]);
+            return DistanceBetweenPlaces(lon1, lat1, lon2, lat2);
+        }
+    }
 }

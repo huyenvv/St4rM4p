@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -7,7 +8,7 @@ using StarMap.Utilities;
 
 namespace StarMap.Controllers
 {
-    public class EventApiController : ApiController
+    public class EventApiController : BaseApiController
     {
         private readonly StarMapEntities _db;
 
@@ -17,10 +18,30 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent()
+        public List<EventModel> GetEvent(string lang, int page)
         {
-            var data = _db.Event.ToList();
-            return data.Count > 0 ? data.Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
+            var data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            var count = data.Count;
+            var start = Common.GetPaging(page, PageSize, count);
+            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
+        }
+
+        // GET api/EventApi
+        public List<EventModel> GetEvent(string location, string lang, int page)
+        {
+            var lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            var data = new List<Event>();
+            foreach (var item in lst)
+            {
+                var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
+                if (distance <= DistanceAround)
+                {
+                    data.Add(item);
+                }
+            }
+            var count = data.Count;
+            var start = Common.GetPaging(page, PageSize, count);
+            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
         }
 
         // GET api/EventApi/5

@@ -19,7 +19,7 @@ namespace StarMap.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    public class AccountApiController : ApiController
+    public class AccountApiController : BaseApiController
     {
         private const string LocalLoginProvider = "Local";
 

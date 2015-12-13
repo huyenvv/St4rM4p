@@ -1,20 +1,26 @@
 ﻿<h2>Domain: @(Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port))</h2>
 <hr />
 <section class="content-wrapper main-content clear-fix">
-    <h2 id="System.Web.Http.Controllers.HttpControllerDescriptor">EventApi</h2>
+    <h2>EventApi</h2>
     <table class="help-page-table">
         <thead>
             <tr><th>API</th><th>Description</th></tr>
         </thead>
         <tbody>
             <tr>
-                <td class="api-name"><a href="#">GET api/EventApi</a></td>
+                <td class="api-name"><a href="#EventApi_lang_page">GET api/EventApi/GetEvent?lang={lang}&amp;page={page}</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>
             </tr>
             <tr>
-                <td class="api-name"><a href="#">GET api/EventApi/{id}</a></td>
+                <td class="api-name"><a href="#EventApi_location_lang_page">GET api/EventApi/GetEvent?location={location}&amp;lang={lang}&amp;page={page}</a></td>
+                <td class="api-documentation">
+                    <p>No documentation available.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="api-name"><a href="#EventApi-id">GET api/EventApi/GetEvent/{id}</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>
@@ -22,20 +28,26 @@
         </tbody>
     </table>
 
-    <h2 id="System.Web.Http.Controllers.HttpControllerDescriptor">GoldPointApi</h2>
+    <h2>GoldPointApi</h2>
     <table class="help-page-table">
         <thead>
             <tr><th>API</th><th>Description</th></tr>
         </thead>
         <tbody>
             <tr>
-                <td class="api-name"><a href="#">GET api/GoldPointApi</a></td>
+                <td class="api-name"><a href="#GoldPointApi_lang_page">GET api/GoldPointApi/GetGoldPoint?lang={lang}&amp;page={page}</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>
             </tr>
             <tr>
-                <td class="api-name"><a href="#">GET api/GoldPointApi/{id}</a></td>
+                <td class="api-name"><a href="#GoldPointApi_location_lang_page">GET api/GoldPointApi/GetGoldPoint?location={location}&amp;lang={lang}&amp;page={page}</a></td>
+                <td class="api-documentation">
+                    <p>No documentation available.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="api-name"><a href="#GoldPointApi-id">GET api/GoldPointApi/GetGoldPoint/{id}</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>
@@ -43,20 +55,40 @@
         </tbody>
     </table>
 
-    <h2 id="System.Web.Http.Controllers.HttpControllerDescriptor">SaleApi</h2>
+    <h2>SaleApi</h2>
     <table class="help-page-table">
         <thead>
             <tr><th>API</th><th>Description</th></tr>
         </thead>
         <tbody>
             <tr>
-                <td class="api-name"><a href="#">GET api/SaleApi</a></td>
+                <td class="api-name"><a href="#SaleApi_lang_page">GET api/SaleApi/GetSale?lang={lang}&amp;page={page}</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>
             </tr>
             <tr>
-                <td class="api-name"><a href="#">GET api/SaleApi/{id}</a></td>
+                <td class="api-name"><a href="#SaleApi_location_lang_page">GET api/SaleApi/GetSale?location={location}&amp;lang={lang}&amp;page={page}</a></td>
+                <td class="api-documentation">
+                    <p>No documentation available.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="api-name"><a href="#SaleApi-id">GET api/SaleApi/GetSale/{id}</a></td>
+                <td class="api-documentation">
+                    <p>No documentation available.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 id="System.Web.Http.Controllers.HttpControllerDescriptor">CategoryApi</h2>
+    <table class="help-page-table">
+        <thead>
+            <tr><th>API</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="api-name"><a href="/Help/Api/GET-api-CategoryApi">GET api/CategoryApi/GetAll</a></td>
                 <td class="api-documentation">
                     <p>No documentation available.</p>
                 </td>

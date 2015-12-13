@@ -184,7 +184,13 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountApiController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseApiController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoryApiController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\EventApiController.cs">
       <SubType>Code</SubType>
@@ -205,7 +211,6 @@
     <Compile Include="Controllers\SaleController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +223,9 @@
     </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CategoryModel.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Event.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
