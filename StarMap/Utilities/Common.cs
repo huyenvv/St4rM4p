@@ -305,7 +305,8 @@ namespace StarMap.Utilities
             return new CategoryModel
             {
                 Id = model.Id,
-                Name = model.Name
+                Name = model.Name,
+                Image = model.Image
             };
         }
 
