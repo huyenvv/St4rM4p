@@ -42,7 +42,7 @@
                     </div>*@
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-9">
-                        <input type="submit" value="@Resources.LogOn" class="btn btn-default" id="btnLogin" />
+                        <input type="submit" value="@Resources.LogOn" data-loading-text="@Resources.Loading..." class="btn btn-default" id="btnLogin" />
                     </div>
                 </div>
                 @*<p>
@@ -60,7 +60,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        var signin = function () {
+        var signin = function ($btn) {
             var tokenUrl = "/Token";
             var loginData = "UserName=" + $("#UserName").val() + "&Password=" + $("#Password").val();
             loginData = loginData + "&grant_type=password";
@@ -68,10 +68,16 @@
                 location.href = "@Url.Action("Index", "Category")";
             }).fail(function (error) {
                 $("#pnlError").html('<div class="alert-danger alert">@Resources.LoginError</div>');
+                $btn.button('reset');
             });
             return false;
         };
 
-        $("#btnLogin").click(signin);
+        $("#btnLogin").click(function () {
+            var $btn = $(this);
+            $btn.button('loading');
+            signin($btn);
+            return false;
+        });
     </script>
 }
