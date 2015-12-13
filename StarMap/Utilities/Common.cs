@@ -361,8 +361,8 @@ namespace StarMap.Utilities
         /// <returns>Kilometter</returns>
         public static double DistanceTwoLocation(string locationA, string locationB)
         {
-            var lonAndLatA = locationA.Split(new[] { '-', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            var lonAndLatB = locationB.Split(new[] { '-', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var lonAndLatA = locationA.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var lonAndLatB = locationB.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             var lat1 = double.Parse(lonAndLatA[0]);
             var lon1 = double.Parse(lonAndLatA[1]);
