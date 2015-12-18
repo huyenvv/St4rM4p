@@ -47,11 +47,6 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <br />
-                <label for="IsHot">@Html.CheckBox("IsHot", Model.IsHot ?? false) Is Hot</label>
-                @Html.ValidationMessageFor(model => model.IsHot)
-            </div>
-            <div class="col-sm-6">
                 <label for="Mobile">@Resources.Mobile</label>
                 @Html.TextBoxFor(model => model.Mobile, new { Class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Mobile)

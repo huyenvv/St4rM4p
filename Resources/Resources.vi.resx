@@ -217,7 +217,7 @@
     <value>Gỡ bỏ</value>
   </data>
   <data name="Sale" xml:space="preserve">
-    <value>Bán hàng</value>
+    <value>Khuyến Mãi</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Lưu lại</value>
@@ -254,5 +254,11 @@
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Đang xử lý</value>
+  </data>
+  <data name="Stars" xml:space="preserve">
+    <value>Sao</value>
+  </data>
+  <data name="NotRated" xml:space="preserve">
+    <value>Chưa đánh giá</value>
   </data>
 </root>

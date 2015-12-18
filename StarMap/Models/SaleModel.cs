@@ -7,6 +7,6 @@ namespace StarMap.Models
 {
     public class SaleModel : GeneralModel
     {
-        public int? Rate {get; set; }
+        public bool? IsHot {get; set; }
     }
 }

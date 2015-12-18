@@ -6,6 +6,7 @@
 }
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />
+<link href="~/Content/star-rating.min.css" rel="stylesheet" />
 <div class="col-md-3">
     @Html.Partial("_AdminMenu")
 </div>
@@ -47,9 +48,9 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <br />
-                <label for="IsHot">@Html.CheckBox("IsHot", Model.IsHot ?? false) Is Hot</label>
-                @Html.ValidationMessageFor(model => model.IsHot)
+                <label for="Rate">@Resources.Rate</label>
+                <input value="@(Model.Rate ?? "0")" type="number" id="Rate" name="Rate">
+                @Html.ValidationMessageFor(model => model.Rate)
             </div>
             <div class="col-sm-6">
                 <label for="Mobile">@Resources.Mobile</label>
@@ -122,5 +123,21 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
         <script src="~/Scripts/fileInput.js"></script>
+        <script src="~/Scripts/star-rating.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#Rate").rating({
+                    defaultCaption: '{rating} @Resources.Stars',
+                    min: 0,
+                    max: 5,
+                    step: 0.5,
+                    size: "sm",
+                    showCaption: true,
+                    showClear: false,
+                    starCaptions: {},
+                    clearCaption: '@Resources.NotRated'
+                });
+            });
+        </script>
     }
 </div>

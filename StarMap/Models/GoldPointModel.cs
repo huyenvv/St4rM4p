@@ -7,6 +7,6 @@ namespace StarMap.Models
 {
     public class GoldPointModel : GeneralModel
     {
-        public bool? IsHot { get; set; }
+        public string Rate { get; set; }
     }
 }

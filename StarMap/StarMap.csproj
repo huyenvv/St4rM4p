@@ -271,6 +271,8 @@
     <Compile Include="Utilities\FileUpload.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\star-rating.min.css" />
+    <Content Include="Scripts\star-rating.min.js" />
     <Content Include="Upload\thumbnail-default.jpg" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
@@ -324,8 +326,25 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Starmap.js" />
     <Content Include="StarMap.sql" />
-    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Category\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Category\NewOrEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Event\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Event\NewOrEdit.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\GoldPoint\Index.cshtml">
@@ -334,6 +353,21 @@
     <Content Include="Views\GoldPoint\NewOrEdit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ShowAllApi.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Sale\NewOrEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_AdminMenu.cshtml" />
+    <Content Include="Views\Shared\_ChangeLanguage.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -344,29 +378,7 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_ChangeLanguage.cshtml" />
-    <Content Include="Views\Shared\_AdminMenu.cshtml" />
-    <Content Include="Views\Event\NewOrEdit.cshtml" />
-    <Content Include="Views\Event\Index.cshtml" />
-    <Content Include="Views\Sale\Index.cshtml" />
-    <Content Include="Views\Sale\NewOrEdit.cshtml" />
-    <Content Include="Views\Home\ShowAllApi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
