@@ -48,7 +48,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,CategoryId")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,CategoryId,PublicDate")] 
             Event even, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -69,6 +69,7 @@ namespace StarMap.Controllers
                 newEvent.ThumbDescription = even.ThumbDescription;
                 newEvent.DetailDescription = even.DetailDescription;
                 newEvent.CategoryId = even.CategoryId;
+                newEvent.PublicDate = even.PublicDate;
                 if (thumbImagePathFile != null)
                 {
                     string fileName = null;

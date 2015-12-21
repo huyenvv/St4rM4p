@@ -18,7 +18,7 @@ namespace StarMap.Models
         public string DetailDescription { get; set; }
         //public Nullable<System.DateTime> PublicDate { get; set; }
         //public System.DateTime CreateDate { get; set; }
-        //public int CategoryId { get; set; }
+        public int CategoryId { get; set; }
         //public string CreatedBy { get; set; }
         //public string Lang { get; set; }
     }

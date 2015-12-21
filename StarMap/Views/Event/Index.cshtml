@@ -19,6 +19,9 @@
                 @Resources.Name
             </th>
             <th>
+                @Resources.EventDate
+            </th>
+            <th>
                 @Resources.Location
             </th>
             <th>
@@ -35,6 +38,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublicDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)

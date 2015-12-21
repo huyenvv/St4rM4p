@@ -261,4 +261,7 @@
   <data name="NotRated" xml:space="preserve">
     <value>Chưa đánh giá</value>
   </data>
+  <data name="EventDate" xml:space="preserve">
+    <value>Ngày diễn ra</value>
+  </data>
 </root>
