@@ -12,12 +12,12 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string lang, int page, int? cateId)
+        public List<SaleModel> GetSale(string lang, int page, int cateId = 0)
         {
             List<Sale> data;
-            if (cateId.HasValue)
+            if (cateId > 0)
             {
-                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {
@@ -30,12 +30,12 @@ namespace StarMap.Controllers
         }
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string location, string lang, int page, int? cateId)
+        public List<SaleModel> GetSale(string location, string lang, int page, int cateId=0)
         {
             List<Sale> lst;
-            if (cateId.HasValue)
+            if (cateId > 0)
             {
-                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {

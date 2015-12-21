@@ -18,12 +18,12 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string lang, int page, int? cateId)
+        public List<EventModel> GetEvent(string lang, int page, int cateId = 0)
         {
             List<Event> data;
-            if (cateId.HasValue)
+            if (cateId > 0)
             {
-                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {
@@ -35,12 +35,12 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string location, string lang, int page, int? cateId)
+        public List<EventModel> GetEvent(string location, string lang, int page, int cateId = 0)
         {
             List<Event> lst;
-            if (cateId.HasValue)
+            if (cateId > 0)
             {
-                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {

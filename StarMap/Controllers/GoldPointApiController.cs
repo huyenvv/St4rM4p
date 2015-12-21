@@ -12,12 +12,12 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/GoldPointApi
-        public List<GoldPointModel> GetGoldPoint(string lang, int page, int? cateId)
+        public List<GoldPointModel> GetGoldPoint(string lang, int page, int cateId=0)
         {
             List<GoldPoint> data;
-            if (cateId.HasValue)
+            if (cateId> 0)
             {
-                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {
@@ -29,12 +29,12 @@ namespace StarMap.Controllers
         }
 
         // GET api/GoldPointApi
-        public List<GoldPointModel> GetGoldPoint(string location, string lang, int page, int? cateId)
+        public List<GoldPointModel> GetGoldPoint(string location, string lang, int page, int cateId=0)
         {
             List<GoldPoint> lst;
-            if (cateId.HasValue)
+            if (cateId > 0)
             {
-                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId.Value).ToList();
+                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
             }
             else
             {
