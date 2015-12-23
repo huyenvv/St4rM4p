@@ -12,18 +12,35 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string lang, int page)
+        public List<SaleModel> GetSale(string lang, int page, int cateId = 0)
         {
-            var data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            List<Sale> data;
+            if (cateId > 0)
+            {
+                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+            }
+            else
+            {
+                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            }
+
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
             return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>();
         }
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string location, string lang, int page)
+        public List<SaleModel> GetSale(string location, string lang, int page, int cateId=0)
         {
-            var lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            List<Sale> lst;
+            if (cateId > 0)
+            {
+                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+            }
+            else
+            {
+                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            }
             var data = new List<Sale>();
             foreach (var item in lst)
             {

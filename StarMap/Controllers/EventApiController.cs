@@ -18,18 +18,34 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string lang, int page)
+        public List<EventModel> GetEvent(string lang, int page, int cateId = 0)
         {
-            var data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            List<Event> data;
+            if (cateId > 0)
+            {
+                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+            }
+            else
+            {
+                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
             return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string location, string lang, int page)
+        public List<EventModel> GetEvent(string location, string lang, int page, int cateId = 0)
         {
-            var lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            List<Event> lst;
+            if (cateId > 0)
+            {
+                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+            }
+            else
+            {
+                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+            }
             var data = new List<Event>();
             foreach (var item in lst)
             {
