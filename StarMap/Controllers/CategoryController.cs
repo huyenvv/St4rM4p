@@ -15,11 +15,11 @@ namespace StarMap.Controllers
     public class CategoryController : BaseController
     {
         private readonly StarMapEntities _db = new StarMapEntities();
-        
+
         // GET: /Category/
         public async Task<ActionResult> Index()
         {
-            return View(await _db.Category.ToListAsync());
+            return View(await _db.Category.Where(m => m.Lang == CurrentLang).ToListAsync());
         }
 
         // GET: /Category/Edit/5
@@ -42,7 +42,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name, Image")] Category category, HttpPostedFileBase imagePathFile)
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name, Image, Lang")] Category category, HttpPostedFileBase imagePathFile)
         {
             if (ModelState.IsValid)
             {
@@ -50,9 +50,10 @@ namespace StarMap.Controllers
                 var newCategory = _db.Category.FirstOrDefault(m => m.Id == category.Id);
                 if (newCategory == null) newCategory = new Category();
                 newCategory.Name = category.Name;
+                newCategory.Lang = CurrentLang;
                 if (imagePathFile != null)
                 {
-                    string fileName = null;
+                    string fileName;
                     FileUpload.CreateFile(imagePathFile, out fileName, false);
                     newCategory.Image = fileName;
                 }

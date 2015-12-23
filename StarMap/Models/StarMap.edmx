@@ -22,6 +22,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Image" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -243,6 +244,7 @@
           <NavigationProperty Name="Event" Relationship="StarMapModel.FK_Event_Category" FromRole="Category" ToRole="Event" />
           <NavigationProperty Name="Sale" Relationship="StarMapModel.FK_Sale_Category" FromRole="Category" ToRole="Sale" />
           <NavigationProperty Name="GoldPoint" Relationship="StarMapModel.FK_GoldPoint_Category" FromRole="Category" ToRole="GoldPoint" />
+          <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
           </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -401,6 +403,7 @@
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="StarMapModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

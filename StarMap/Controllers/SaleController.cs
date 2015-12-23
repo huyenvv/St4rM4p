@@ -30,7 +30,7 @@ namespace StarMap.Controllers
         // GET: /Sale/Edit/5
         public async Task<ActionResult> NewOrEdit(int id = 0)
         {
-            ViewBag.Category = _db.Category.ToList();
+            ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
             if (id == 0)
             {
                 return View(new Sale());
@@ -94,7 +94,7 @@ namespace StarMap.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Category = _db.Category.ToList();
+            ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
             return View(Sale);
         }
 

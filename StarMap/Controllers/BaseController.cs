@@ -9,6 +9,14 @@ namespace StarMap.Controllers
     public class BaseController : Controller
     {
 
+        public string CurrentLang
+        {
+            get
+            {
+                return CultureHelper.GetCurrentCulture(true);
+            }
+        }
+
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
             string cultureName = null;
