@@ -46,6 +46,6 @@ input[type="checkbox"].input-validation-error {
 }
 
 #frmChangeLanguage {
-    float: right;
+    max-width: 200px;
     padding: 9px 0 0 10px;
 }

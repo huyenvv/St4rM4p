@@ -262,7 +262,8 @@ namespace StarMap.Utilities
                 Mobile = model.Mobile,
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
-                ThumbImage = model.ThumbImage
+                ThumbImage = model.ThumbImage,
+                CategoryId = model.CategoryId
             };
         }
 
@@ -278,7 +279,8 @@ namespace StarMap.Utilities
                 Mobile = model.Mobile,
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
-                ThumbImage = model.ThumbImage
+                ThumbImage = model.ThumbImage,
+                CategoryId = model.CategoryId
             };
         }
 
@@ -295,7 +297,8 @@ namespace StarMap.Utilities
                 Mobile = model.Mobile,
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
-                ThumbImage = model.ThumbImage
+                ThumbImage = model.ThumbImage,
+                CategoryId = model.CategoryId
             };
         }
 
