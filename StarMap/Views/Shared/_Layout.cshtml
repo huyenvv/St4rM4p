@@ -33,12 +33,9 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-    <hr />
-    <div class="container body-content">
-        <footer>
-            <p>&copy; @DateTime.Now.Year - StarMap PRJ</p>
-        </footer>
-    </div>
+    <footer>
+        Copyright &copy; @DateTime.Now.Year StarMap. All Right Reserved.
+    </footer>
     <script>
         function getController() {
             return "/@(ViewContext.RouteData.Values["controller"] as String)";

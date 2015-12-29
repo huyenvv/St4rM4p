@@ -49,3 +49,15 @@ input[type="checkbox"].input-validation-error {
     max-width: 200px;
     padding: 9px 0 0 10px;
 }
+
+footer {
+    border-top: 1px solid #eeeeee;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    line-height: 30px;
+    background: #101010;
+    color: #999999;
+}
