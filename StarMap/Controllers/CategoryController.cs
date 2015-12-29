@@ -27,14 +27,14 @@ namespace StarMap.Controllers
         {
             if (id == 0)
             {
-                return View(new Category());
+                return View(new CategoryModel());
             }
             Category category = await _db.Category.FindAsync(id);
             if (category == null)
             {
-                return View(new Category());
+                return View(new CategoryModel());
             }
-            return View(category);
+            return View(category.ToCategoryModel());
         }
 
         // POST: /Category/Edit/5
@@ -42,11 +42,17 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name, Image, Lang")] Category category, HttpPostedFileBase imagePathFile)
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name, Image, Lang")] CategoryModel category, HttpPostedFileBase imagePathFile)
         {
             if (ModelState.IsValid)
             {
-
+                // check exists
+                var exitsName = _db.Category.FirstOrDefault(m => m.Lang == CurrentLang && m.Name.ToLower() == category.Name.Trim().ToLower());
+                if (exitsName != null)
+                {
+                    ModelState.AddModelError("", Resources.Resources.CategoryNameExists);
+                    return View(category);
+                }
                 var newCategory = _db.Category.FirstOrDefault(m => m.Id == category.Id);
                 if (newCategory == null) newCategory = new Category();
                 newCategory.Name = category.Name;

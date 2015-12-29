@@ -264,4 +264,16 @@
   <data name="EventDate" xml:space="preserve">
     <value>Event date</value>
   </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>Location format incorrect</value>
+  </data>
+  <data name="PhoneNumberError" xml:space="preserve">
+    <value>This  field is not a valid phone number</value>
+  </data>
+  <data name="ThisFieldIsRequired" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
+  <data name="CategoryNameExists" xml:space="preserve">
+    <value>Category name already exists. Please choose another name.</value>
+  </data>
 </root>

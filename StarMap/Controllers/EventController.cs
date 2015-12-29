@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,7 +9,6 @@ using StarMap.Helpers;
 using System.Threading.Tasks;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace StarMap.Controllers
 {
@@ -33,14 +30,14 @@ namespace StarMap.Controllers
             ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
             if (id == 0)
             {
-                return View(new Event());
+                return View(new EventModel());
             }
             Event even = await _db.Event.FindAsync(id);
             if (even == null)
             {
-                return View(new Event());
+                return View(new EventModel());
             }
-            return View(even);
+            return View(even.ToEventModel());
         }
 
         // POST: /Event/Edit/5
@@ -49,7 +46,7 @@ namespace StarMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,CategoryId,PublicDate")] 
-            Event even, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
+            EventModel even, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
             {

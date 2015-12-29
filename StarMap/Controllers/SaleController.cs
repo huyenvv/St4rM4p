@@ -33,14 +33,14 @@ namespace StarMap.Controllers
             ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
             if (id == 0)
             {
-                return View(new Sale());
+                return View(new SaleModel());
             }
             Sale Sale = await _db.Sale.FindAsync(id);
             if (Sale == null)
             {
-                return View(new Sale());
+                return View(new SaleModel());
             }
-            return View(Sale);
+            return View(Sale.ToSaleModel());
         }
 
         // POST: /Sale/Edit/5
@@ -49,7 +49,7 @@ namespace StarMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId")] 
-            Sale Sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
+            SaleModel Sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
             {

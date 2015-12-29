@@ -264,4 +264,16 @@
   <data name="EventDate" xml:space="preserve">
     <value>Ngày diễn ra</value>
   </data>
+  <data name="LocationError" xml:space="preserve">
+    <value>Sai định dạng tọa độ</value>
+  </data>
+  <data name="PhoneNumberError" xml:space="preserve">
+    <value>Sai định dạng số điện thoại</value>
+  </data>
+  <data name="ThisFieldIsRequired" xml:space="preserve">
+    <value>Trường yêu cầu bắt buộc</value>
+  </data>
+  <data name="CategoryNameExists" xml:space="preserve">
+    <value>Tên danh mục đã tồn tại. Vui lòng chọn tên khác.</value>
+  </data>
 </root>

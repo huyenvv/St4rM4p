@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category name already exists. Please choose another name..
+        /// </summary>
+        public static string CategoryNameExists {
+            get {
+                return ResourceManager.GetString("CategoryNameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change.
         /// </summary>
         public static string Change {
@@ -340,6 +349,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location format incorrect.
+        /// </summary>
+        public static string LocationError {
+            get {
+                return ResourceManager.GetString("LocationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The username or password is incorrect.
         /// </summary>
         public static string LoginError {
@@ -412,6 +430,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This  field is not a valid phone number.
+        /// </summary>
+        public static string PhoneNumberError {
+            get {
+                return ResourceManager.GetString("PhoneNumberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rate.
         /// </summary>
         public static string Rate {
@@ -471,6 +498,15 @@ namespace Resources {
         public static string Stars {
             get {
                 return ResourceManager.GetString("Stars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field is required.
+        /// </summary>
+        public static string ThisFieldIsRequired {
+            get {
+                return ResourceManager.GetString("ThisFieldIsRequired", resourceCulture);
             }
         }
         

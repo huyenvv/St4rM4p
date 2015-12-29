@@ -30,14 +30,14 @@ namespace StarMap.Controllers
             ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
             if (id == 0)
             {
-                return View(new GoldPoint());
+                return View(new GoldPointModel());
             }
             GoldPoint goldPoint = await _db.GoldPoint.FindAsync(id);
             if (goldPoint == null)
             {
-                return View(new GoldPoint());
+                return View(new GoldPointModel());
             }
-            return View(goldPoint);
+            return View(goldPoint.ToGoldPointModel());
         }
 
         // POST: /GoldPoint/Edit/5
@@ -46,7 +46,7 @@ namespace StarMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,Rate,CategoryId")] 
-            GoldPoint goldPoint, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
+            GoldPointModel goldPoint, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
             {
