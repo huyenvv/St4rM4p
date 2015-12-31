@@ -228,6 +228,11 @@ namespace StarMap.Utilities
             }
             return val;
         }
+
+        public static string GetLocaleDateTime(DateTime? date, string lang)
+        {
+            return lang == "vi" ? date.HasValue ? date.Value.ToString("dd/MM/yyyy HH:mm") : string.Empty : date.ToString();
+        }
     }
     public static class Cultures
     {
@@ -280,7 +285,8 @@ namespace StarMap.Utilities
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
                 ThumbImage = model.ThumbImage,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                PublicDate = model.PublicDate
             };
         }
 

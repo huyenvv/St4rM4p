@@ -1,5 +1,6 @@
 ﻿@model StarMap.Models.EventModel
 @using Resources
+@using StarMap.Utilities
 @{
     ViewBag.Title = (Model.Id != 0 ? Resources.Edit : Resources.Create) + " " + Resources.Event.ToLower();
     var listCate = (List<StarMap.Models.Category>)ViewBag.Category;
@@ -50,7 +51,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="PublicDate">@Resources.EventDate</label>
-                <input type="text" name="PublicDate" value="@Model.PublicDate" class="typeDate form-control" />
+                <input type="text" name="PublicDate" value="@Common.GetLocaleDateTime(Model.PublicDate, lang)" class="typeDate form-control" />
             </div>
             <div class="col-sm-6">
                 <label for="Mobile">@Resources.Mobile</label>

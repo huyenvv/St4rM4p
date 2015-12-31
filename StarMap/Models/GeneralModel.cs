@@ -14,7 +14,7 @@ namespace StarMap.Models
         public string Name { get; set; }
         public string Address { get; set; }
 
-        [Phone(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PhoneNumberError")]
+        [Phone(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PhoneNumberError", ErrorMessage = null)]
         public string Mobile { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "ThisFieldIsRequired")]

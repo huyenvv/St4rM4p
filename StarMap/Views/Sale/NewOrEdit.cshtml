@@ -1,4 +1,5 @@
 ﻿@model StarMap.Models.SaleModel
+@using StarMap.Utilities
 @using Resources
 @{
     ViewBag.Title = (Model.Id != 0 ? Resources.Edit : Resources.Create) + " " + Resources.Sale.ToLower();
@@ -50,13 +51,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="StartDate">@Resources.StartDate</label>
-                @Html.TextBoxFor(model => model.StartDate, new { Class = "form-control typeDate" })
-                @Html.ValidationMessageFor(model => model.StartDate)
+                <input type="text" name="StartDate" value="@Common.GetLocaleDateTime(Model.StartDate, lang)" class="typeDate form-control" />
             </div>
             <div class="col-sm-6">
                 <label for="EndDate">@Resources.EndDate</label>
-                @Html.TextBoxFor(model => model.EndDate, new { Class = "form-control typeDate" })
-                @Html.ValidationMessageFor(model => model.EndDate)
+                <input type="text" name="EndDate" value="@Common.GetLocaleDateTime(Model.EndDate, lang)" class="typeDate form-control" />                
             </div>
         </div>
         <br />
