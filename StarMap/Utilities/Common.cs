@@ -298,7 +298,9 @@ namespace StarMap.Utilities
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
                 ThumbImage = model.ThumbImage,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate
             };
         }
 

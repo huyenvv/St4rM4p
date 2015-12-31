@@ -3,9 +3,11 @@
 @{
     ViewBag.Title = (Model.Id != 0 ? Resources.Edit : Resources.Create) + " " + Resources.Sale.ToLower();
     var listCate = (List<StarMap.Models.Category>)ViewBag.Category;
+    var lang = StarMap.Helpers.CultureHelper.GetCurrentCulture(true);
 }
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />
+<link href="/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 <div class="col-md-3">
     @Html.Partial("_AdminMenu")
 </div>
@@ -45,6 +47,19 @@
             @Html.TextBoxFor(model => model.Address, new { Class = "form-control" })
             @Html.ValidationMessageFor(model => model.Address)
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="StartDate">@Resources.StartDate</label>
+                @Html.TextBoxFor(model => model.StartDate, new { Class = "form-control typeDate" })
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+            <div class="col-sm-6">
+                <label for="EndDate">@Resources.EndDate</label>
+                @Html.TextBoxFor(model => model.EndDate, new { Class = "form-control typeDate" })
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+        </div>
+        <br />
         <div class="row">
             <div class="col-sm-6">
                 <br />
@@ -122,5 +137,16 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
         <script src="~/Scripts/fileInput.js"></script>
+        <script src="~/Scripts/moment-with-locales.js"></script>
+        <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.typeDate').datetimepicker({
+                    @*format: '@formatDate',
+                    widgetPositioning: { vertical: 'bottom' }*@
+                    locale: '@lang'
+                });
+            });
+        </script>
     }
 </div>

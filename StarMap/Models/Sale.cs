@@ -23,7 +23,8 @@ namespace StarMap.Models
         public string DetailImage { get; set; }
         public string ThumbDescription { get; set; }
         public string DetailDescription { get; set; }
-        public Nullable<System.DateTime> PublicDate { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<bool> IsHot { get; set; }
         public int CategoryId { get; set; }

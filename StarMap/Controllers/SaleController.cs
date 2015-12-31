@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,7 +9,6 @@ using StarMap.Helpers;
 using System.Threading.Tasks;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace StarMap.Controllers
 {
@@ -48,7 +45,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId,StartDate,EndDate")] 
             SaleModel Sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -70,6 +67,9 @@ namespace StarMap.Controllers
                 newSale.DetailDescription = Sale.DetailDescription;
                 newSale.IsHot = Sale.IsHot;
                 newSale.CategoryId = Sale.CategoryId;
+                newSale.StartDate = Sale.StartDate;
+                newSale.EndDate = Sale.EndDate;
+                
                 if (thumbImagePathFile != null)
                 {
                     string fileName = null;

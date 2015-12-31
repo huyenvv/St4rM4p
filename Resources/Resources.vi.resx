@@ -276,4 +276,13 @@
   <data name="CategoryNameExists" xml:space="preserve">
     <value>Tên danh mục đã tồn tại. Vui lòng chọn tên khác.</value>
   </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Ngày kết thúc</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Ngày bắt đầu</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Thời gian</value>
+  </data>
 </root>
