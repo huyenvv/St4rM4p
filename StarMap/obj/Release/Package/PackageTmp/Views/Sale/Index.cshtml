@@ -2,7 +2,7 @@
 @using Resources
 
 @{
-    ViewBag.Title = Resources.List + " " + Resources.Sale.ToLower();
+    ViewBag.Title = Resources.SaleList;
 }
 
 <div class="col-md-3">
@@ -43,9 +43,9 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate) 
-                    - 
-                    @Html.DisplayFor(modelItem => item.EndDate) 
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)
@@ -57,7 +57,10 @@
                     @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsHot)
+                    @if (item.IsHot.HasValue && item.IsHot.Value)
+                    {
+                        <label class="label label-danger"><i class="glyphicon glyphicon-ok-circle"></i> HOT</label>
+                    }
                 </td>
                 <td>
                     <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>

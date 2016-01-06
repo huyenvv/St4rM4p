@@ -199,7 +199,7 @@
     <value>Log off</value>
   </data>
   <data name="LogOn" xml:space="preserve">
-    <value>Log on</value>
+    <value>Log in</value>
   </data>
   <data name="Management" xml:space="preserve">
     <value>Management</value>
@@ -284,5 +284,23 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure ?</value>
+  </data>
+  <data name="CategoryList" xml:space="preserve">
+    <value>Category list</value>
+  </data>
+  <data name="EventList" xml:space="preserve">
+    <value>Event list</value>
+  </data>
+  <data name="GoldPointList" xml:space="preserve">
+    <value>Gold point list</value>
+  </data>
+  <data name="ImageExtensionError" xml:space="preserve">
+    <value>You must select an image file only</value>
+  </data>
+  <data name="SaleList" xml:space="preserve">
+    <value>Promotion list</value>
   </data>
 </root>

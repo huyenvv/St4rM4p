@@ -285,4 +285,22 @@
   <data name="Duration" xml:space="preserve">
     <value>Thời gian</value>
   </data>
+  <data name="ImageExtensionError" xml:space="preserve">
+    <value>Sai định dạng ảnh.</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Bạn có chắc chắn ?</value>
+  </data>
+  <data name="CategoryList" xml:space="preserve">
+    <value>Danh sách danh mục</value>
+  </data>
+  <data name="EventList" xml:space="preserve">
+    <value>Danh sách sự kiện</value>
+  </data>
+  <data name="GoldPointList" xml:space="preserve">
+    <value>Danh sách điểm vàng</value>
+  </data>
+  <data name="SaleList" xml:space="preserve">
+    <value>Danh sách khuyễn mãi</value>
+  </data>
 </root>

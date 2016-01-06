@@ -239,6 +239,7 @@
     <Compile Include="Models\GoldPointModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Models\GoldPoint.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
@@ -382,6 +383,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\_ShowImage.cshtml" />
+    <Content Include="Views\Shared\_CheckFileImageExtension.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

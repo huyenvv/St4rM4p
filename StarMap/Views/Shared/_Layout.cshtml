@@ -43,6 +43,10 @@
         function getAction() {
             return "/@(ViewContext.RouteData.Values["action"] as String)";
         }
+
+        var smMessage = {
+            deleteConfirm: "@Html.Raw(Resources.Resources.AreYouSure)"
+        };
     </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -47,7 +47,7 @@ namespace StarMap.Controllers
             if (ModelState.IsValid)
             {
                 // check exists
-                var exitsName = _db.Category.FirstOrDefault(m => m.Lang == CurrentLang && m.Name.ToLower() == category.Name.Trim().ToLower());
+                var exitsName = _db.Category.FirstOrDefault(m => m.Lang == CurrentLang && m.Id != category.Id && m.Name.ToLower() == category.Name.Trim().ToLower());
                 if (exitsName != null)
                 {
                     ModelState.AddModelError("", Resources.Resources.CategoryNameExists);
@@ -65,6 +65,11 @@ namespace StarMap.Controllers
                 }
                 if (category.Id == 0)
                 {
+                    if (imagePathFile == null)
+                    {
+                        ModelState.AddModelError("Image", Resources.Resources.ThisFieldIsRequired);
+                        return View(category);
+                    }
                     _db.Category.Add(newCategory);
                     await _db.SaveChangesAsync();
                     return RedirectToAction("Index");

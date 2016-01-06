@@ -1,0 +1,10 @@
+﻿@using Resources
+<script>
+    $(".fileinput").on("change.bs.fileinput", function () {
+        var $this = $(this);
+        if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test($this.find("input[type=file]").val())) {
+            alert('@Resources.ImageExtensionError');
+            $this.fileinput('reset');
+        }
+    });
+</script>

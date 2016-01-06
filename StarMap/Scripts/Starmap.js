@@ -1,6 +1,6 @@
 ﻿(function ($) {
     $(".confirmDelete").click(function () {
-        if (confirm("Bạn chắc chắn?")) {
+        if (confirm(smMessage.deleteConfirm)) {
             return true;
         }
         return false;

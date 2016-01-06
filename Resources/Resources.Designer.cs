@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure ?.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Back {
@@ -129,6 +138,15 @@ namespace Resources {
         public static string Category {
             get {
                 return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category list.
+        /// </summary>
+        public static string CategoryList {
+            get {
+                return ResourceManager.GetString("CategoryList", resourceCulture);
             }
         }
         
@@ -268,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event list.
+        /// </summary>
+        public static string EventList {
+            get {
+                return ResourceManager.GetString("EventList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {
@@ -304,11 +331,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gold point list.
+        /// </summary>
+        public static string GoldPointList {
+            get {
+                return ResourceManager.GetString("GoldPointList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string Image {
             get {
                 return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must select an image file only.
+        /// </summary>
+        public static string ImageExtensionError {
+            get {
+                return ResourceManager.GetString("ImageExtensionError", resourceCulture);
             }
         }
         
@@ -394,7 +439,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log on.
+        ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string LogOn {
             get {
@@ -489,6 +534,15 @@ namespace Resources {
         public static string Sale {
             get {
                 return ResourceManager.GetString("Sale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promotion list.
+        /// </summary>
+        public static string SaleList {
+            get {
+                return ResourceManager.GetString("SaleList", resourceCulture);
             }
         }
         

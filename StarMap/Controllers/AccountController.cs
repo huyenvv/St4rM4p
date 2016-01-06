@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -30,6 +35,35 @@ namespace StarMap.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken()]
+        public async Task<ActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    if (Request.Url != null)
+                    {
+                        
+                        var uri = Request.Url.Scheme + "://" + Request.Url.Host + ":" + Request.Url.Port + "/Token";
+                        var values = new Dictionary<string, string>
+                        {
+                           { "UserName", model.UserName },
+                           { "Password", model.Password },
+                           { "grant_type", "password" }
+                        };
+                        var content = new FormUrlEncodedContent(values);
+                        var response = await client.PostAsync(uri, content);
+                        var responseString = await response.Content.ReadAsStringAsync();
+                        return RedirectToAction("Index", "Category");
+                    }
+                }
+            }
+            return View(model);
         }
 
         //
@@ -323,7 +357,8 @@ namespace StarMap.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

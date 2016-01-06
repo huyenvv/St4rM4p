@@ -1,5 +1,6 @@
 ﻿@model StarMap.Models.EventModel
 @using Resources
+@using StarMap.Models
 @using StarMap.Utilities
 @{
     ViewBag.Title = (Model.Id != 0 ? Resources.Edit : Resources.Create) + " " + Resources.Event.ToLower();
@@ -64,42 +65,22 @@
             <div class="col-sm-6">
                 <label for="ThumbImage">@Resources.ThumbImage</label>
                 <div class="form-group">
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <div class="fileinput-new thumbnail" style="width: 200px;">
-                            <img src="@(!string.IsNullOrEmpty(Model.ThumbImage) ? Model.ThumbImage : Url.Content("~/Upload/thumbnail-default.jpg"))" alt="Alternate Text" width="300" height="200" />
-                        </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;
-                            max-height: 150px; line-height: 20px;">
-                        </div>
-                        <div>
-                            <span class="btn btn-file btn-warning">
-                                <span class="fileinput-new">@Resources.SelectImage</span> <span class="fileinput-exists">@Resources.Change</span>
-                                <input type="file" name="thumbImagePathFile" class="default" />
-                            </span>
-                            <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">@Resources.Remove</a>
-                        </div>
-                    </div>
+                    @Html.Partial("_ShowImage", new ImageModel
+                    {
+                        ImagePath = Model.ThumbImage,
+                        ImageName = "thumbImagePathFile"
+                    })
                 </div>
                 @Html.ValidationMessageFor(model => model.ThumbImage)
             </div>
             <div class="col-sm-6">
                 <label for="DetailImage">@Resources.DetailImage</label>
                 <div class="form-group">
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <div class="fileinput-new thumbnail" style="width: 200px;">
-                            <img src="@(!string.IsNullOrEmpty(Model.DetailImage) ? Model.DetailImage : Url.Content("~/Upload/thumbnail-default.jpg"))" alt="Alternate Text" width="300" height="200" />
-                        </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;
-                            max-height: 150px; line-height: 20px;">
-                        </div>
-                        <div>
-                            <span class="btn btn-file btn-warning">
-                                <span class="fileinput-new">@Resources.SelectImage</span> <span class="fileinput-exists">@Resources.Change</span>
-                                <input type="file" name="detailImagePathFile" class="default" />
-                            </span>
-                            <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">@Resources.Remove</a>
-                        </div>
-                    </div>
+                    @Html.Partial("_ShowImage", new ImageModel
+                    {
+                        ImagePath = Model.DetailImage,
+                        ImageName = "detailImagePathFile"
+                    })
                 </div>
                 @Html.ValidationMessageFor(model => model.DetailImage)
             </div>
@@ -135,5 +116,6 @@
                 });
             });
         </script>
+        @Html.Partial("_CheckFileImageExtension")
     }
 </div>
