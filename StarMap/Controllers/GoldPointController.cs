@@ -37,6 +37,10 @@ namespace StarMap.Controllers
             {
                 return View(new GoldPointModel());
             }
+            if (goldPoint.Lang != CurrentLang)
+            {
+                return RedirectToAction("Index");
+            }
             return View(goldPoint.ToGoldPointModel());
         }
 

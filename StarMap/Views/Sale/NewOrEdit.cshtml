@@ -52,11 +52,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="StartDate">@Resources.StartDate</label>
-                <input type="text" name="StartDate" value="@Common.GetLocaleDateTime(Model.StartDate, lang)" class="typeDate form-control" />
+                <input type="text" name="StartDate" value="@Common.GetLocaleDateTime(Model.StartDate, lang)" data-date-min-date="@Common.GetMinDate(Model.StartDate)" id="startDate" class="typeDate form-control" />
             </div>
             <div class="col-sm-6">
                 <label for="EndDate">@Resources.EndDate</label>
-                <input type="text" name="EndDate" value="@Common.GetLocaleDateTime(Model.EndDate, lang)" class="typeDate form-control" />
+                <input type="text" name="EndDate" value="@Common.GetLocaleDateTime(Model.EndDate, lang)" id="endDate" class="typeDate form-control" />
             </div>
         </div>
         <br />
@@ -121,10 +121,21 @@
         <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
         <script>
             $(document).ready(function () {
-                $('.typeDate').datetimepicker({
-                                        @*format: '@formatDate',
-                    widgetPositioning: { vertical: 'bottom' }*@
-                    locale: '@lang'
+                $('#endDate').datetimepicker({
+                    locale: '@lang',
+                    useCurrent: false,
+                });
+
+                $("#startDate").datetimepicker({
+                    locale: '@lang',
+                    useCurrent: false,
+                }).on("dp.change", function (e) {
+                    var startDate = new Date(e.date);
+                    var endDate = $('#endDate').data("DateTimePicker").date();
+                    $('#endDate').data("DateTimePicker").minDate(e.date);
+                    if (endDate < startDate) {
+                        $('#endDate').data("DateTimePicker").date(startDate);
+                    }
                 });
             });
         </script>

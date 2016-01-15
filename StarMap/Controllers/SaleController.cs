@@ -32,12 +32,16 @@ namespace StarMap.Controllers
             {
                 return View(new SaleModel());
             }
-            Sale Sale = await _db.Sale.FindAsync(id);
-            if (Sale == null)
+            Sale sale = await _db.Sale.FindAsync(id);
+            if (sale == null)
             {
                 return View(new SaleModel());
             }
-            return View(Sale.ToSaleModel());
+            if (sale.Lang != CurrentLang)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(sale.ToSaleModel());
         }
 
         // POST: /Sale/Edit/5

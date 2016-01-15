@@ -34,6 +34,10 @@ namespace StarMap.Controllers
             {
                 return View(new CategoryModel());
             }
+            if (category.Lang != CurrentLang)
+            {
+                return RedirectToAction("Index");
+            }
             return View(category.ToCategoryModel());
         }
 

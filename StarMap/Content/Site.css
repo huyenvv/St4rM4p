@@ -64,3 +64,7 @@ footer {
 #MainContent {
     padding-bottom: 31px;
 }
+
+.label-silver {
+    background-color: #ddd;
+}

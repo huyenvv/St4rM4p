@@ -303,4 +303,7 @@
   <data name="SaleList" xml:space="preserve">
     <value>Danh sách khuyễn mãi</value>
   </data>
+  <data name="Undefined" xml:space="preserve">
+    <value>Chưa xác định</value>
+  </data>
 </root>

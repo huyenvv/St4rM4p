@@ -303,4 +303,7 @@
   <data name="SaleList" xml:space="preserve">
     <value>Promotion list</value>
   </data>
+  <data name="Undefined" xml:space="preserve">
+    <value>Undefined</value>
+  </data>
 </root>

@@ -37,6 +37,10 @@ namespace StarMap.Controllers
             {
                 return View(new EventModel());
             }
+            if (even.Lang != CurrentLang)
+            {
+                return RedirectToAction("Index");
+            }
             return View(even.ToEventModel());
         }
 

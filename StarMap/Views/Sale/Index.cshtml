@@ -43,9 +43,24 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+
+                    @if (item.StartDate.HasValue)
+                    {
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    }
+                    else
+                    {
+                        @Resources.Undefined
+                    } -
                     <br />
-                    @Html.DisplayFor(modelItem => item.EndDate)
+                    @if (item.EndDate.HasValue)
+                    {
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    }
+                    else
+                    {
+                        @Resources.Undefined
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)

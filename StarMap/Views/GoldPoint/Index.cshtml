@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = Resources.GoldPointList;
+    var listLabel = new[] { "", "default", "silver", "success", "info", "warning" };
 }
 
 <div class="col-md-3">
@@ -35,6 +36,17 @@
 
         @foreach (var item in Model)
         {
+            var rate = item.Rate.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            string label;
+            try
+            {
+                label = listLabel[int.Parse(rate[0])];
+            }
+            catch (Exception)
+            {
+                label = listLabel[0];
+            }
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -49,7 +61,7 @@
                     @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
-                    <span class="label label-primary">@item.Rate @Resources.Stars</span>
+                    <span class="label label-@label"> &nbsp;@item.Rate @*@Resources.Stars*@ <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
 
                 </td>
                 <td>

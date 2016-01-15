@@ -233,6 +233,12 @@ namespace StarMap.Utilities
         {
             return lang == "vi" ? date.HasValue ? date.Value.ToString("dd/MM/yyyy HH:mm") : string.Empty : date.ToString();
         }
+        public static string GetMinDate(DateTime? date)
+        {
+            if (date.HasValue)
+                return date.Value.ToString("yyyy/MM/dd HH:mm");
+            return DateTime.Now.ToString("yyyy/MM/dd 00:00:00");
+        }
     }
     public static class Cultures
     {

@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<StarMap.Models.Category>
+@using Resources
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.CategoryList;
 }
 
 <div class="col-md-3">
@@ -10,12 +11,12 @@
 <div class="col-md-9">
     <h3 class="page-header">@ViewBag.Title</h3>
     <p>
-        @Html.ActionLink("Create New", "NewOrEdit", null, new { Class = "btn btn-primary" })
+        @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
     </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Resources.Name
             </th>
             <th></th>
         </tr>
@@ -27,8 +28,8 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Sửa", "NewOrEdit", new { id = item.Id }) |
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { Class = "confirmDelete" })
+                    <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger  btn-xs confirmDelete"><i class="glyphicon glyphicon-remove-circle"></i> @Resources.Delete</a>
                 </td>
             </tr>
         }
