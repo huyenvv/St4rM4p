@@ -12,7 +12,7 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string lang, int page, int cateId = 0)
+        public object GetSale(string lang, int page, int cateId = 0)
         {
             List<Sale> data;
             if (cateId > 0)
@@ -26,11 +26,15 @@ namespace StarMap.Controllers
 
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>();
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>()
+            };
         }
 
         // GET api/SaleApi
-        public List<SaleModel> GetSale(string location, string lang, int page, int cateId=0)
+        public object GetSale(string location, string lang, int page, int cateId = 0)
         {
             List<Sale> lst;
             if (cateId > 0)
@@ -52,7 +56,11 @@ namespace StarMap.Controllers
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>();
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>()
+            };
         }
 
         // GET api/SaleApi/5

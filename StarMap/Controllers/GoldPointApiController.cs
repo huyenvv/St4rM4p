@@ -12,7 +12,7 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/GoldPointApi
-        public List<GoldPointModel> GetGoldPoint(string lang, int page, int cateId=0)
+        public object GetGoldPoint(string lang, int page, int cateId=0)
         {
             List<GoldPoint> data;
             if (cateId> 0)
@@ -25,11 +25,15 @@ namespace StarMap.Controllers
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>();
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>()
+            };
         }
 
         // GET api/GoldPointApi
-        public List<GoldPointModel> GetGoldPoint(string location, string lang, int page, int cateId=0)
+        public object GetGoldPoint(string location, string lang, int page, int cateId=0)
         {
             List<GoldPoint> lst;
             if (cateId > 0)
@@ -51,7 +55,11 @@ namespace StarMap.Controllers
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>();
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>()
+            };
         }
 
         // GET api/GoldPointApi/5

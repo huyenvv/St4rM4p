@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -18,7 +19,7 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string lang, int page, int cateId = 0)
+        public object GetEvent(string lang, int page, int cateId = 0)
         {
             List<Event> data;
             if (cateId > 0)
@@ -31,11 +32,15 @@ namespace StarMap.Controllers
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>()
+            };
         }
 
         // GET api/EventApi
-        public List<EventModel> GetEvent(string location, string lang, int page, int cateId = 0)
+        public object GetEvent(string location, string lang, int page, int cateId = 0)
         {
             List<Event> lst;
             if (cateId > 0)
@@ -57,7 +62,12 @@ namespace StarMap.Controllers
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
-            return count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>();
+
+            return new
+            {
+                totalPage = ((count - 1) / PageSize) + 1,
+                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>()
+            };
         }
 
         // GET api/EventApi/5
