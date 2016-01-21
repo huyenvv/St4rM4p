@@ -5,71 +5,66 @@
     ViewBag.Title = Resources.EventList;
 }
 
-<div class="col-md-3">
-    @Html.Partial("_AdminMenu")
-</div>
-<div class="col-md-9">
-    <h3 class="page-header">@ViewBag.Title</h3>
-    <p>
-        @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
-    </p>
-    <table class="table">
+<h3 class="page-header">@ViewBag.Title</h3>
+<p>
+    @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Resources.Name
+        </th>
+        <th>
+            @Resources.EventDate
+        </th>
+        <th>
+            @Resources.Location
+        </th>
+        <th>
+            @Resources.Category
+        </th>
+        <th>
+            @Resources.Address
+        </th>
+        <th>
+            @Resources.Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Resources.Name
-            </th>
-            <th>
-                @Resources.EventDate
-            </th>
-            <th>
-                @Resources.Location
-            </th>
-            <th>
-                @Resources.Category
-            </th>
-            <th>
-                @Resources.Address
-            </th>
-            <th>
-                @Resources.Status
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @if (item.IsActive)
+                {
+                    <label class="label label-success"><i class="glyphicon glyphicon-ok"></i> @Resources.Active</label>
+                }
+                else
+                {
+                    <label class="label label-danger"><i class="glyphicon glyphicon-remove"></i> @Resources.Inactive</label>
+                }
+            </td>
+            <td>
+                <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>
+                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger  btn-xs confirmDelete"><i class="glyphicon glyphicon-remove-circle"></i> @Resources.Delete</a>
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublicDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @if (item.IsActive)
-                    {
-                        <label class="label label-success"><i class="glyphicon glyphicon-ok"></i> @Resources.Active</label>
-                    }
-                    else
-                    {
-                        <label class="label label-danger"><i class="glyphicon glyphicon-remove"></i> @Resources.Inactive</label>
-                    }
-                </td>
-                <td>
-                    <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>
-                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger  btn-xs confirmDelete"><i class="glyphicon glyphicon-remove-circle"></i> @Resources.Delete</a>
-                </td>
-            </tr>
-        }
-
-    </table>
-</div>
+</table>

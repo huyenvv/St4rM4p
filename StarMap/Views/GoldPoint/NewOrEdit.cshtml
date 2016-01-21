@@ -8,134 +8,129 @@
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />
 <link href="~/Content/star-rating.min.css" rel="stylesheet" />
-<div class="col-md-3">
-    @Html.Partial("_AdminMenu")
-</div>
-<div class="col-md-9">
-    <h3 class="page-header">@ViewBag.Title</h3>
+<h3 class="page-header">@ViewBag.Title</h3>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        <div class="form-group">
-            <label for="Name">@Resources.Name</label>
-            @Html.TextBoxFor(model => model.Name, new { Class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Name)
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        <label for="Name">@Resources.Name</label>
+        @Html.TextBoxFor(model => model.Name, new { Class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    <div class="form-group">
+        <label for="IsActive">@Html.CheckBox("IsActive", Model.IsActive) Is Active</label>
+        @Html.ValidationMessageFor(model => model.IsActive)
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="Location">@Resources.Location</label>
+            @Html.TextBoxFor(model => model.Location, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location)
         </div>
-        <div class="form-group">
-            <label for="IsActive">@Html.CheckBox("IsActive", Model.IsActive) Is Active</label>
-            @Html.ValidationMessageFor(model => model.IsActive)
+        <div class="col-sm-6">
+            <label for="CategoryId">@Resources.Category</label>
+            <select name="CategoryId" class="form-control">
+                @foreach (var item in listCate)
+                {
+                    <option value="@item.Id" @(Model.CategoryId == item.Id ? "Selected" : "")>@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.CategoryId)
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="Location">@Resources.Location</label>
-                @Html.TextBoxFor(model => model.Location, new { Class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Location)
-            </div>
-            <div class="col-sm-6">
-                <label for="CategoryId">@Resources.Category</label>
-                <select name="CategoryId" class="form-control">
-                    @foreach (var item in listCate)
-                    {
-                        <option value="@item.Id" @(Model.CategoryId == item.Id ? "Selected" : "")>@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.CategoryId)
-            </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="Address">@Resources.Address</label>
+        @Html.TextBoxFor(model => model.Address, new { Class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Address)
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="Rate">@Resources.Rate</label>
+            <input value="@(Model.Rate ?? "0")" type="number" id="Rate" name="Rate">
+            @Html.ValidationMessageFor(model => model.Rate)
         </div>
-        <br />
-        <div class="form-group">
-            <label for="Address">@Resources.Address</label>
-            @Html.TextBoxFor(model => model.Address, new { Class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Address)
+        <div class="col-sm-6">
+            <label for="Mobile">@Resources.Mobile</label>
+            @Html.TextBoxFor(model => model.Mobile, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Mobile)
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="Rate">@Resources.Rate</label>
-                <input value="@(Model.Rate ?? "0")" type="number" id="Rate" name="Rate">
-                @Html.ValidationMessageFor(model => model.Rate)
-            </div>
-            <div class="col-sm-6">
-                <label for="Mobile">@Resources.Mobile</label>
-                @Html.TextBoxFor(model => model.Mobile, new { Class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Mobile)
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="ThumbImage">@Resources.ThumbImage</label>
-                <div class="form-group">
-                    @Html.Partial("_ShowImage", new ImageModel
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="ThumbImage">@Resources.ThumbImage</label>
+            <div class="form-group">
+                @Html.Partial("_ShowImage", new ImageModel
                     {
                         ImagePath = Model.ThumbImage,
                         ImageName = "thumbImagePathFile"
                     })
-                </div>
-                @Html.ValidationMessageFor(model => model.ThumbImage)
             </div>
-            <div class="col-sm-6">
-                <label for="DetailImage">@Resources.DetailImage</label>
-                <div class="form-group">
-                    @Html.Partial("_ShowImage", new ImageModel
+            @Html.ValidationMessageFor(model => model.ThumbImage)
+        </div>
+        <div class="col-sm-6">
+            <label for="DetailImage">@Resources.DetailImage</label>
+            <div class="form-group">
+                @Html.Partial("_ShowImage", new ImageModel
                     {
                         ImagePath = Model.DetailImage,
                         ImageName = "detailImagePathFile"
                     })
-                </div>
-                @Html.ValidationMessageFor(model => model.DetailImage)
             </div>
+            @Html.ValidationMessageFor(model => model.DetailImage)
         </div>
-        <div class="form-group">
-            <label for="ThumbDescription">@Resources.ThumbDescription</label>
-            @Html.TextAreaFor(model => model.ThumbDescription, new { Class = "form-control", rows = "3" })
-            @Html.ValidationMessageFor(model => model.ThumbDescription)
-        </div>
-        <div class="form-group">
-            <label for="DetailDescription">@Resources.DetailDescription</label>
-            @Html.TextAreaFor(model => model.DetailDescription, new { Class = "form-control", rows = "9" })
-            @Html.ValidationMessageFor(model => model.DetailDescription)
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group">
-            <input type="submit" value="@Resources.Save" class="btn btn-primary" />
-            @Html.ActionLink(Resources.Back, "Index", null, new { Class = "btn btn-default" })
-        </div>
-    }
+    </div>
+    <div class="form-group">
+        <label for="ThumbDescription">@Resources.ThumbDescription</label>
+        @Html.TextAreaFor(model => model.ThumbDescription, new { Class = "form-control", rows = "3" })
+        @Html.ValidationMessageFor(model => model.ThumbDescription)
+    </div>
+    <div class="form-group">
+        <label for="DetailDescription">@Resources.DetailDescription</label>
+        @Html.TextAreaFor(model => model.DetailDescription, new { Class = "form-control", rows = "9" })
+        @Html.ValidationMessageFor(model => model.DetailDescription)
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <input type="submit" value="@Resources.Save" class="btn btn-primary" />
+        @Html.ActionLink(Resources.Back, "Index", null, new { Class = "btn btn-default" })
+    </div>
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script src="~/Scripts/fileInput.js"></script>
-        <script src="~/Scripts/star-rating.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#Rate").rating({
-                    defaultCaption: '{rating} @Resources.Stars',
-                    min: 0,
-                    max: 5,
-                    step: 0.5,
-                    size: "sm",
-                    showCaption: true,
-                    showClear: false,
-                    starCaptions: {},
-                    clearCaption: '@Resources.NotRated',
-                    starCaptionClasses: {
-                        0.5: 'label label-default',
-                        1: 'label label-default',
-                        1.5: 'label label-silver',
-                        2: 'label label-silver',
-                        2.5: 'label label-success',
-                        3: 'label label-success',
-                        3.5: 'label label-info',
-                        4: 'label label-info',
-                        4.5: 'label label-warning',
-                        5: 'label label-warning'
-                    }
-                });
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/fileInput.js"></script>
+    <script src="~/Scripts/star-rating.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Rate").rating({
+                defaultCaption: '{rating} @Resources.Stars',
+                min: 0,
+                max: 5,
+                step: 0.5,
+                size: "sm",
+                showCaption: true,
+                showClear: false,
+                starCaptions: {},
+                clearCaption: '@Resources.NotRated',
+                starCaptionClasses: {
+                    0.5: 'label label-default',
+                    1: 'label label-default',
+                    1.5: 'label label-silver',
+                    2: 'label label-silver',
+                    2.5: 'label label-success',
+                    3: 'label label-success',
+                    3.5: 'label label-info',
+                    4: 'label label-info',
+                    4.5: 'label label-warning',
+                    5: 'label label-warning'
+                }
             });
-        </script>
-        @Html.Partial("_CheckFileImageExtension")
-    }
-</div>
+        });
+    </script>
+    @Html.Partial("_CheckFileImageExtension")
+}
