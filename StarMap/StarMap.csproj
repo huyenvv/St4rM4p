@@ -275,6 +275,7 @@
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\star-rating.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\countries.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\star-rating.min.js" />
     <Content Include="StarMap.sql" />

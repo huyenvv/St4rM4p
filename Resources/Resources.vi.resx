@@ -175,7 +175,7 @@
     <value>First name is required</value>
   </data>
   <data name="GoldPoint" xml:space="preserve">
-    <value>Điểm vàng</value>
+    <value>Điểm sao</value>
   </data>
   <data name="Image" xml:space="preserve">
     <value>Ảnh</value>
@@ -298,7 +298,7 @@
     <value>Danh sách sự kiện</value>
   </data>
   <data name="GoldPointList" xml:space="preserve">
-    <value>Danh sách điểm vàng</value>
+    <value>Danh sách điểm sao</value>
   </data>
   <data name="SaleList" xml:space="preserve">
     <value>Danh sách khuyễn mãi</value>
@@ -314,5 +314,17 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Trạng thái</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Thành phố</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Quốc gia</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Chọn thành phố</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Chọn quốc gia</value>
   </data>
 </root>

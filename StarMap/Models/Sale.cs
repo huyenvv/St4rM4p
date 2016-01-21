@@ -30,8 +30,8 @@ namespace StarMap.Models
         public string Lang { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
-        public Nullable<int> CityId { get; set; }
-        public Nullable<int> CountryId { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
         public bool IsActive { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

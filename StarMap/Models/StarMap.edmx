@@ -42,8 +42,8 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="CityId" Type="int" />
-          <Property Name="CountryId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="GoldPoint">
@@ -65,8 +65,8 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="CityId" Type="int" />
-          <Property Name="CountryId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale">
@@ -89,8 +89,8 @@
           <Property Name="Lang" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
-          <Property Name="CityId" Type="int" />
-          <Property Name="CountryId" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Event_AspNetUsers">
@@ -274,8 +274,8 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_Event_AspNetUsers" FromRole="Event" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="StarMapModel.FK_Event_Category" FromRole="Event" ToRole="Category" />
@@ -299,8 +299,8 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_GoldPoint_AspNetUsers" FromRole="GoldPoint" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="StarMapModel.FK_GoldPoint_Category" FromRole="GoldPoint" ToRole="Category" />
@@ -325,8 +325,8 @@
           <Property Name="Lang" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="StarMapModel.FK_Sale_AspNetUsers" FromRole="Sale" ToRole="AspNetUsers" />
           <NavigationProperty Name="Category" Relationship="StarMapModel.FK_Sale_Category" FromRole="Sale" ToRole="Category" />
@@ -434,8 +434,8 @@
             <EntityTypeMapping TypeName="StarMapModel.Event">
               <MappingFragment StoreEntitySet="Event">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -457,8 +457,8 @@
             <EntityTypeMapping TypeName="StarMapModel.GoldPoint">
               <MappingFragment StoreEntitySet="GoldPoint">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -481,8 +481,8 @@
             <EntityTypeMapping TypeName="StarMapModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Lang" ColumnName="Lang" />

@@ -79,10 +79,10 @@
             <label for="ThumbImage">@Resources.ThumbImage</label>
             <div class="form-group">
                 @Html.Partial("_ShowImage", new ImageModel
-                    {
-                        ImagePath = Model.ThumbImage,
-                        ImageName = "thumbImagePathFile"
-                    })
+                {
+                    ImagePath = Model.ThumbImage,
+                    ImageName = "thumbImagePathFile"
+                })
             </div>
             @Html.ValidationMessageFor(model => model.ThumbImage)
         </div>
@@ -90,12 +90,22 @@
             <label for="DetailImage">@Resources.DetailImage</label>
             <div class="form-group">
                 @Html.Partial("_ShowImage", new ImageModel
-                    {
-                        ImagePath = Model.DetailImage,
-                        ImageName = "detailImagePathFile"
-                    })
+                {
+                    ImagePath = Model.DetailImage,
+                    ImageName = "detailImagePathFile"
+                })
             </div>
             @Html.ValidationMessageFor(model => model.DetailImage)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="Country">@Resources.Country</label>
+            <select name="Country" class="form-control" id="Country"></select>
+        </div>
+        <div class="col-sm-6">
+            <label for="City">@Resources.City</label>
+            <select name="City" class="form-control" id="City"></select>
         </div>
     </div>
     <div class="form-group">
@@ -116,12 +126,28 @@
 }
 
 @section Scripts {
+    <script>
+        var starmap = {
+            CountrySelect: "@Html.Raw(Resources.SelectCountry)",
+            CitySelect: "@Html.Raw(Resources.SelectCity)"
+        };
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/fileInput.js"></script>
     <script src="~/Scripts/moment-with-locales.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/countries.js"></script>
     <script>
         $(document).ready(function () {
+            @if (!string.IsNullOrEmpty(Model.Country))
+            {
+            @:printState("City", getStateIndex('@Model.Country'));
+                                    @:$("#Country").val('@Model.Country');
+                                                }
+            @if (!string.IsNullOrEmpty(Model.City))
+            {
+            @:$("#City").val('@Model.City');
+                                                }
             $('#endDate').datetimepicker({
                 locale: '@lang',
                 useCurrent: false,

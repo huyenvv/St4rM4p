@@ -49,7 +49,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId,StartDate,EndDate,IsActive,CountryId,CityId")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId,StartDate,EndDate,IsActive,Country,City")] 
             SaleModel Sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -74,8 +74,8 @@ namespace StarMap.Controllers
                 newSale.StartDate = Sale.StartDate;
                 newSale.EndDate = Sale.EndDate;
                 newSale.IsActive = Sale.IsActive;
-                newSale.CountryId = Sale.CountryId;
-                newSale.CityId = Sale.CityId;
+                newSale.Country = Sale.Country;
+                newSale.City = Sale.City;
                 
                 if (thumbImagePathFile != null)
                 {

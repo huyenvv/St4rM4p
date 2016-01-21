@@ -30,8 +30,8 @@ namespace StarMap.Models
         [Required(ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "ThisFieldIsRequired")]
         public int CategoryId { get; set; }
 
-        public int? CountryId { get; set; }
-        public int? CityId { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
         public bool IsActive { get; set; }
         //public string CreatedBy { get; set; }
         //public string Lang { get; set; }
