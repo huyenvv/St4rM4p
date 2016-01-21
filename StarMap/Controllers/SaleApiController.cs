@@ -17,11 +17,11 @@ namespace StarMap.Controllers
             List<Sale> data;
             if (cateId > 0)
             {
-                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
 
             var count = data.Count;
@@ -39,11 +39,11 @@ namespace StarMap.Controllers
             List<Sale> lst;
             if (cateId > 0)
             {
-                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
             var data = new List<Sale>();
             foreach (var item in lst)
@@ -67,7 +67,7 @@ namespace StarMap.Controllers
         [ResponseType(typeof(SaleModel))]
         public IHttpActionResult GetSale(int id)
         {
-            Sale sale = _db.Sale.Find(id);
+            Sale sale = _db.Sale.FirstOrDefault(m => m.Id == id && m.IsActive);
             if (sale == null)
             {
                 return NotFound();

@@ -24,11 +24,11 @@ namespace StarMap.Controllers
             List<Event> data;
             if (cateId > 0)
             {
-                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
@@ -45,11 +45,11 @@ namespace StarMap.Controllers
             List<Event> lst;
             if (cateId > 0)
             {
-                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
             var data = new List<Event>();
             foreach (var item in lst)
@@ -74,7 +74,7 @@ namespace StarMap.Controllers
         [ResponseType(typeof(EventModel))]
         public IHttpActionResult GetEvent(int id)
         {
-            Event even = _db.Event.Find(id);
+            Event even = _db.Event.FirstOrDefault(m=>m.Id==id && m.IsActive);
             if (even == null)
             {
                 return NotFound();

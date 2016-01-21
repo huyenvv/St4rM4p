@@ -49,7 +49,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,Rate,CategoryId")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,Rate,CategoryId,IsActive,CountryId,CityId")] 
             GoldPointModel goldPoint, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -71,6 +71,9 @@ namespace StarMap.Controllers
                 newGoldPoint.DetailDescription = goldPoint.DetailDescription;
                 newGoldPoint.Rate = goldPoint.Rate;
                 newGoldPoint.CategoryId = goldPoint.CategoryId;
+                newGoldPoint.IsActive = goldPoint.IsActive;
+                newGoldPoint.CountryId = goldPoint.CountryId;
+                newGoldPoint.CityId = goldPoint.CityId;
                 if (thumbImagePathFile != null)
                 {
                     string fileName = null;

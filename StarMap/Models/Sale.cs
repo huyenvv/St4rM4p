@@ -23,13 +23,16 @@ namespace StarMap.Models
         public string DetailImage { get; set; }
         public string ThumbDescription { get; set; }
         public string DetailDescription { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<bool> IsHot { get; set; }
         public int CategoryId { get; set; }
         public string CreatedBy { get; set; }
         public string Lang { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Category Category { get; set; }

@@ -33,6 +33,9 @@
             <th>
                 Hot
             </th>
+            <th>
+                @Resources.Status
+            </th>
             <th></th>
         </tr>
 
@@ -75,6 +78,16 @@
                     @if (item.IsHot.HasValue && item.IsHot.Value)
                     {
                         <label class="label label-danger"><i class="glyphicon glyphicon-ok-circle"></i> HOT</label>
+                    }
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <label class="label label-success"><i class="glyphicon glyphicon-ok"></i> @Resources.Active</label>
+                    }
+                    else
+                    {
+                        <label class="label label-danger"><i class="glyphicon glyphicon-remove"></i> @Resources.Inactive</label>
                     }
                 </td>
                 <td>

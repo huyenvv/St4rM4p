@@ -274,7 +274,10 @@ namespace StarMap.Utilities
                 Name = model.Name,
                 ThumbDescription = model.ThumbDescription,
                 ThumbImage = model.ThumbImage,
-                CategoryId = model.CategoryId
+                CategoryId = model.CategoryId,
+                IsActive = model.IsActive,
+                CountryId = model.CountryId,
+                CityId = model.CityId
             };
         }
 
@@ -292,7 +295,10 @@ namespace StarMap.Utilities
                 ThumbDescription = model.ThumbDescription,
                 ThumbImage = model.ThumbImage,
                 CategoryId = model.CategoryId,
-                PublicDate = model.PublicDate
+                PublicDate = model.PublicDate,
+                IsActive = model.IsActive,
+                CountryId = model.CountryId,
+                CityId = model.CityId
             };
         }
 
@@ -312,7 +318,10 @@ namespace StarMap.Utilities
                 ThumbImage = model.ThumbImage,
                 CategoryId = model.CategoryId,
                 StartDate = model.StartDate,
-                EndDate = model.EndDate
+                EndDate = model.EndDate,
+                IsActive = model.IsActive,
+                CountryId = model.CountryId,
+                CityId = model.CityId
             };
         }
 

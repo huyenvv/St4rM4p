@@ -17,11 +17,11 @@ namespace StarMap.Controllers
             List<GoldPoint> data;
             if (cateId> 0)
             {
-                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
@@ -38,11 +38,11 @@ namespace StarMap.Controllers
             List<GoldPoint> lst;
             if (cateId > 0)
             {
-                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId).ToList();
+                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
             }
             else
             {
-                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower()).ToList();
+                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             }
             var data = new List<GoldPoint>();
             foreach (var item in lst)
@@ -66,7 +66,7 @@ namespace StarMap.Controllers
         [ResponseType(typeof(GoldPointModel))]
         public IHttpActionResult GetGoldPoint(int id)
         {
-            GoldPoint goldpoint = _db.GoldPoint.Find(id);
+            GoldPoint goldpoint = _db.GoldPoint.FirstOrDefault(m => m.Id == id && m.IsActive);
             if (goldpoint == null)
             {
                 return NotFound();

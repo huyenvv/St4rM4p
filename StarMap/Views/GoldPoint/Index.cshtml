@@ -31,6 +31,9 @@
             <th>
                 @Resources.Rate
             </th>
+            <th>
+                @Resources.Status
+            </th>
             <th></th>
         </tr>
 
@@ -63,6 +66,16 @@
                 <td>
                     <span class="label label-@label"> &nbsp;@item.Rate @*@Resources.Stars*@ <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
 
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <label class="label label-success"><i class="glyphicon glyphicon-ok"></i> @Resources.Active</label>
+                    }
+                    else
+                    {
+                        <label class="label label-danger"><i class="glyphicon glyphicon-remove"></i> @Resources.Inactive</label>
+                    }
                 </td>
                 <td>
                     <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>

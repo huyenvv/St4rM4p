@@ -28,6 +28,9 @@ namespace StarMap.Models
         public int CategoryId { get; set; }
         public string CreatedBy { get; set; }
         public string Lang { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public Nullable<int> CountryId { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Category Category { get; set; }
