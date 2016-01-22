@@ -10,6 +10,7 @@ using StarMap.Models;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PagedList;
 
 namespace StarMap.Controllers
 {
@@ -19,9 +20,13 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /GoldPoint/
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? page)
         {
-            return View(await _db.GoldPoint.Where(m => m.Lang == CurrentLang).ToListAsync());
+            if (!page.HasValue || page.Value < 1)
+            {
+                page = 1;
+            }
+            return View(_db.GoldPoint.Where(m => m.Lang == CurrentLang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /GoldPoint/Edit/5

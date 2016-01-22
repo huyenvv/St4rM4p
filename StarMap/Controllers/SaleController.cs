@@ -9,6 +9,7 @@ using StarMap.Helpers;
 using System.Threading.Tasks;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace StarMap.Controllers
 {
@@ -18,10 +19,14 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /Sale/
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? page)
         {
+            if (!page.HasValue || page.Value < 1)
+            {
+                page = 1;
+            }
             var lang = CultureHelper.GetCurrentCulture(true);
-            return View(await _db.Sale.Where(m => m.Lang == lang).ToListAsync());
+            return View(_db.Sale.Where(m => m.Lang == lang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /Sale/Edit/5

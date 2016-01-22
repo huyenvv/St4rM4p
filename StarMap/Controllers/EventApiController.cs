@@ -55,7 +55,7 @@ namespace StarMap.Controllers
             foreach (var item in lst)
             {
                 var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
-                if (distance <= DistanceAround)
+                if (distance <= RadiusSearch)
                 {
                     data.Add(item);
                 }

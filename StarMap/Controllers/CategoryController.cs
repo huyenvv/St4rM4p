@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using StarMap.Helpers;
 using StarMap.Models;
 using StarMap.Utilities;
@@ -17,9 +18,13 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /Category/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-            return View(await _db.Category.Where(m => m.Lang == CurrentLang).ToListAsync());
+            if (!page.HasValue || page.Value < 1)
+            {
+                page = 1;
+            }
+            return View(_db.Category.Where(m => m.Lang == CurrentLang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /Category/Edit/5

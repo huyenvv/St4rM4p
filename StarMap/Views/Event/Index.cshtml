@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StarMap.Models.Event>
+﻿@model PagedList.IPagedList<StarMap.Models.Event>
 @using Resources
 
 @{
@@ -62,9 +62,10 @@
             </td>
             <td>
                 <a href="@Url.Action("NewOrEdit", new {id = item.Id})" class="btn btn-default  btn-xs"><i class="glyphicon glyphicon-pencil"></i> @Resources.Edit</a>
-                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger  btn-xs confirmDelete"><i class="glyphicon glyphicon-remove-circle"></i> @Resources.Delete</a>
+                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-danger  btn-xs confirmDelete"><i class="glyphicon glyphicon-remove-circle"></i> @Resources.Delete</a>
             </td>
         </tr>
     }
 
 </table>
+@Html.Partial("_Paging", Model)

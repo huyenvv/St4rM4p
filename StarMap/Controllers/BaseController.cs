@@ -3,11 +3,19 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using StarMap.Helpers;
+using StarMap.Utilities;
 
 namespace StarMap.Controllers
 {
     public class BaseController : Controller
     {
+        public int PageSize
+        {
+            get
+            {
+                return Convert.ToInt32("PageSizeWeb".AppSetting());
+            }
+        }
 
         public string CurrentLang
         {
@@ -39,7 +47,7 @@ namespace StarMap.Controllers
 
             return base.BeginExecuteCore(callback, state);
         }
-        
+
 
     }
 }

@@ -1,0 +1,6 @@
+﻿@*@model PagedList.IPagedList<object>
+@using PagedList.Mvc;
+@using Resources
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
