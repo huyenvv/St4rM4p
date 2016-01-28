@@ -10,48 +10,31 @@ namespace StarMap.Controllers
     public class GoldPointApiController : BaseApiController
     {
         private readonly StarMapEntities _db = new StarMapEntities();
-
+        
         // GET api/GoldPointApi
-        public object GetGoldPoint(string lang, int page, int cateId=0)
+        public object GetGoldPoint(string lang, int page, int cateId = 0, string searchText = "", string location = "")
         {
-            List<GoldPoint> data;
-            if (cateId> 0)
-            {
-                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
-            }
-            else
-            {
-                data = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
-            var count = data.Count;
-            var start = Common.GetPaging(page, PageSize, count);
-            return new
-            {
-                totalPage = ((count - 1) / PageSize) + 1,
-                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>()
-            };
-        }
+            IEnumerable<GoldPoint> lst = cateId > 0 
+                ? _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList() 
+                : _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
+            if (!string.IsNullOrEmpty(searchText))
+                lst = lst.Where(m => m.Name.ToLower().Contains(searchText.ToLower()));
 
-        // GET api/GoldPointApi
-        public object GetGoldPoint(string location, string lang, int page, int cateId=0)
-        {
-            List<GoldPoint> lst;
-            if (cateId > 0)
-            {
-                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
-            }
-            else
-            {
-                lst = _db.GoldPoint.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
             var data = new List<GoldPoint>();
-            foreach (var item in lst)
+            if (!string.IsNullOrEmpty(location))
             {
-                var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
-                if (distance <= RadiusSearch)
+                foreach (var item in lst)
                 {
-                    data.Add(item);
+                    var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
+                    if (distance <= RadiusSearch)
+                    {
+                        data.Add(item);
+                    }
                 }
+            }
+            else
+            {
+                data = lst.ToList();
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);

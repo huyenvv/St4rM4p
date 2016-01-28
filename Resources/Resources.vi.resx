@@ -175,7 +175,7 @@
     <value>First name is required</value>
   </data>
   <data name="GoldPoint" xml:space="preserve">
-    <value>Điểm sao</value>
+    <value>Địa điểm sao</value>
   </data>
   <data name="Image" xml:space="preserve">
     <value>Ảnh</value>
@@ -298,7 +298,7 @@
     <value>Danh sách sự kiện</value>
   </data>
   <data name="GoldPointList" xml:space="preserve">
-    <value>Danh sách điểm sao</value>
+    <value>Danh sách địa điểm sao</value>
   </data>
   <data name="SaleList" xml:space="preserve">
     <value>Danh sách khuyễn mãi</value>

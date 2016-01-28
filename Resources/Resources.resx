@@ -175,7 +175,7 @@
     <value>First name is required</value>
   </data>
   <data name="GoldPoint" xml:space="preserve">
-    <value>Star Point</value>
+    <value>Start places</value>
   </data>
   <data name="Image" xml:space="preserve">
     <value>Image</value>
@@ -295,7 +295,7 @@
     <value>Event list</value>
   </data>
   <data name="GoldPointList" xml:space="preserve">
-    <value>Star point list</value>
+    <value>Start places list</value>
   </data>
   <data name="ImageExtensionError" xml:space="preserve">
     <value>You must select an image file only</value>

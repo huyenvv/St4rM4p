@@ -194,6 +194,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GeneralApiController.cs" />
     <Compile Include="Controllers\CategoryApiController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -255,6 +256,7 @@
     <Compile Include="Models\Sale.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchAllModel.cs" />
     <Compile Include="Models\StarMap.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -275,6 +277,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\FileUpload.cs" />
   </ItemGroup>
   <ItemGroup>

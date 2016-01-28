@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -12,48 +13,31 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET api/SaleApi
-        public object GetSale(string lang, int page, int cateId = 0)
+        public object GetSale(string lang, int page, int cateId = 0, string searchText = "", string location = "")
         {
-            List<Sale> data;
-            if (cateId > 0)
-            {
-                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
-            }
-            else
-            {
-                data = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
+            IEnumerable<Sale> lst = cateId > 0
+                ? _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && String.Equals(m.Lang, lang, StringComparison.CurrentCultureIgnoreCase) && m.CategoryId == cateId && m.IsActive).ToList()
+                : _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && String.Equals(m.Lang, lang, StringComparison.CurrentCultureIgnoreCase) && m.IsActive).ToList();
+            if (!string.IsNullOrEmpty(searchText))
+                lst = lst.Where(m => m.Name.ToLower().Contains(searchText.ToLower()));
 
-            var count = data.Count;
-            var start = Common.GetPaging(page, PageSize, count);
-            return new
-            {
-                totalPage = ((count - 1) / PageSize) + 1,
-                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToSaleModel()).ToList() : new List<SaleModel>()
-            };
-        }
-
-        // GET api/SaleApi
-        public object GetSale(string location, string lang, int page, int cateId = 0)
-        {
-            List<Sale> lst;
-            if (cateId > 0)
-            {
-                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
-            }
-            else
-            {
-                lst = _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
             var data = new List<Sale>();
-            foreach (var item in lst)
+            if (!string.IsNullOrEmpty(location))
             {
-                var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
-                if (distance <= RadiusSearch)
+                foreach (var item in lst)
                 {
-                    data.Add(item);
+                    var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
+                    if (distance <= RadiusSearch)
+                    {
+                        data.Add(item);
+                    }
                 }
             }
+            else
+            {
+                data = lst.ToList();
+            }
+            
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
             return new

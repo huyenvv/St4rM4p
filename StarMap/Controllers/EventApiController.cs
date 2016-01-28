@@ -19,46 +19,30 @@ namespace StarMap.Controllers
         }
 
         // GET api/EventApi
-        public object GetEvent(string lang, int page, int cateId = 0)
+        public object GetEvent(string lang, int page, int cateId = 0, string searchText = "", string location = "")
         {
-            List<Event> data;
-            if (cateId > 0)
-            {
-                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
-            }
-            else
-            {
-                data = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
-            var count = data.Count;
-            var start = Common.GetPaging(page, PageSize, count);
-            return new
-            {
-                totalPage = ((count - 1) / PageSize) + 1,
-                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToEventModel()).ToList() : new List<EventModel>()
-            };
-        }
+            IEnumerable<Event> lst = cateId > 0
+                ? _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive)
+                : _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive);
 
-        // GET api/EventApi
-        public object GetEvent(string location, string lang, int page, int cateId = 0)
-        {
-            List<Event> lst;
-            if (cateId > 0)
+            if (!string.IsNullOrEmpty(searchText))
+                lst = lst.Where(m => m.Name.ToLower().Contains(searchText.ToLower()));
+
+            var data = new List<Event>();
+            if (!string.IsNullOrEmpty(location))
             {
-                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList();
+                foreach (var item in lst)
+                {
+                    var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
+                    if (distance <= RadiusSearch)
+                    {
+                        data.Add(item);
+                    }
+                }
             }
             else
             {
-                lst = _db.Event.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
-            }
-            var data = new List<Event>();
-            foreach (var item in lst)
-            {
-                var distance = GoogleHelpers.DistanceTwoLocation(location, item.Location);
-                if (distance <= RadiusSearch)
-                {
-                    data.Add(item);
-                }
+                data = lst.ToList();
             }
             var count = data.Count;
             var start = Common.GetPaging(page, PageSize, count);
@@ -74,7 +58,7 @@ namespace StarMap.Controllers
         [ResponseType(typeof(EventModel))]
         public IHttpActionResult GetEvent(int id)
         {
-            Event even = _db.Event.FirstOrDefault(m=>m.Id==id && m.IsActive);
+            Event even = _db.Event.FirstOrDefault(m => m.Id == id && m.IsActive);
             if (even == null)
             {
                 return NotFound();
