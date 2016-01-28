@@ -349,7 +349,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start places.
+        ///   Looks up a localized string similar to Star places.
         /// </summary>
         public static string GoldPoint {
             get {
@@ -358,7 +358,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start places list.
+        ///   Looks up a localized string similar to Star places list.
         /// </summary>
         public static string GoldPointList {
             get {
