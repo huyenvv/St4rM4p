@@ -16,8 +16,8 @@ namespace StarMap.Controllers
         public object GetSale(string lang, int page, int cateId = 0, string searchText = "", string location = "")
         {
             IEnumerable<Sale> lst = cateId > 0
-                ? _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && String.Equals(m.Lang, lang, StringComparison.CurrentCultureIgnoreCase) && m.CategoryId == cateId && m.IsActive).ToList()
-                : _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && String.Equals(m.Lang, lang, StringComparison.CurrentCultureIgnoreCase) && m.IsActive).ToList();
+                ? _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.CategoryId == cateId && m.IsActive).ToList()
+                : _db.Sale.Where(m => !string.IsNullOrEmpty(m.Lang) && m.Lang.ToLower() == lang.ToLower() && m.IsActive).ToList();
             if (!string.IsNullOrEmpty(searchText))
                 lst = lst.Where(m => m.Name.ToLower().Contains(searchText.ToLower()));
 
