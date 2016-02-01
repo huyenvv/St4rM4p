@@ -44,13 +44,13 @@ namespace StarMap.Controllers
                 lstGoldPoint = lstGoldPoint.Where(m => listCate.Contains(m.CategoryId.ToString(CultureInfo.InvariantCulture)));
                 lstPromotion = lstPromotion.Where(m => listCate.Contains(m.CategoryId.ToString(CultureInfo.InvariantCulture)));
             }
-
-            searchText = Common.RemoveSign4Vietnamese(Common.RemoveSymbol(searchText));
+            
             if (!string.IsNullOrEmpty(searchText))
             {
-                lstEvent = lstEvent.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText.ToLower()));
-                lstGoldPoint = lstGoldPoint.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText.ToLower()));
-                lstPromotion = lstPromotion.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText.ToLower()));
+                searchText = Common.RemoveSign4Vietnamese(Common.RemoveSymbol(searchText)).ToLower();
+                lstEvent = lstEvent.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText));
+                lstGoldPoint = lstGoldPoint.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText));
+                lstPromotion = lstPromotion.Where(m => Common.RemoveSign4Vietnamese(Common.RemoveSymbol(m.Name.ToLower())).Contains(searchText));
             }
 
             var allItems = new List<SearchAllModel>();
@@ -72,51 +72,15 @@ namespace StarMap.Controllers
                     dataPromotion.AddRange(from item in lstPromotion let distance = GoogleHelpers.DistanceTwoLocation(location, item.Location) where distance <= RadiusSearch select item);
                 }
 
-                allItems.AddRange(dataEvent.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.Event,
-                    Title = m.Name
-                }));
-                allItems.AddRange(dataGoldPoint.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.GoldPoint,
-                    Title = m.Name
-                }));
-                allItems.AddRange(dataPromotion.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.Promotion,
-                    Title = m.Name
-                }));
+                allItems.AddRange(dataEvent.Select(m => m.TosSearchAllModel()));
+                allItems.AddRange(dataGoldPoint.Select(m => m.TosSearchAllModel()));
+                allItems.AddRange(dataPromotion.Select(m => m.TosSearchAllModel()));
             }
             else
             {
-                allItems.AddRange(lstEvent.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.Event,
-                    Title = m.Name
-                }));
-                allItems.AddRange(lstGoldPoint.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.GoldPoint,
-                    Title = m.Name
-                }));
-                allItems.AddRange(lstPromotion.Select(m => new SearchAllModel
-                {
-                    ItemId = m.Id,
-                    Address = m.Address,
-                    CategoryType = ApiType.Promotion,
-                    Title = m.Name
-                }));
+                allItems.AddRange(lstEvent.Select(m => m.TosSearchAllModel()));
+                allItems.AddRange(lstGoldPoint.Select(m => m.TosSearchAllModel()));
+                allItems.AddRange(lstPromotion.Select(m => m.TosSearchAllModel()));
             }
             var count = allItems.Count;
             var start = Common.GetPaging(page, PageSize, count);

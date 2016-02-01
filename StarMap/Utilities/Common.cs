@@ -335,6 +335,55 @@ namespace StarMap.Utilities
             };
         }
 
+        public static SearchAllModel TosSearchAllModel(this Sale model)
+        {
+            return new SearchAllModel
+            {
+                ItemId = model.Id,
+                Address = model.Address,
+                CategoryType = ApiType.Promotion,
+                Title = model.Name,
+                Location = model.Location,
+                ThumbImage = model.ThumbImage,
+                ThumbDescription = model.ThumbDescription,
+                DetailImage = model.DetailImage,
+                DetailDescription = model.DetailDescription,
+                Mobile = model.Mobile
+            };
+        }
+        public static SearchAllModel TosSearchAllModel(this GoldPoint model)
+        {
+            return new SearchAllModel
+            {
+                ItemId = model.Id,
+                Address = model.Address,
+                CategoryType = ApiType.GoldPoint,
+                Title = model.Name,
+                Location = model.Location,
+                ThumbImage = model.ThumbImage,
+                ThumbDescription = model.ThumbDescription,
+                DetailImage = model.DetailImage,
+                DetailDescription = model.DetailDescription,
+                Mobile = model.Mobile
+            };
+        }
+        public static SearchAllModel TosSearchAllModel(this Event model)
+        {
+            return new SearchAllModel
+            {
+                ItemId = model.Id,
+                Address = model.Address,
+                CategoryType = ApiType.Event,
+                Title = model.Name,
+                Location = model.Location,
+                ThumbImage = model.ThumbImage,
+                ThumbDescription = model.ThumbDescription,
+                DetailImage = model.DetailImage,
+                DetailDescription = model.DetailDescription,
+                Mobile = model.Mobile
+            };
+        }
+
     }
 
     public static class GoogleHelpers
