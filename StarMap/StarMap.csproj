@@ -194,7 +194,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\GeneralApiController.cs" />
     <Compile Include="Controllers\CategoryApiController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -205,6 +204,7 @@
     <Compile Include="Controllers\EventController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\GeneralApiController.cs" />
     <Compile Include="Controllers\GoldPointApiController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -383,7 +383,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
