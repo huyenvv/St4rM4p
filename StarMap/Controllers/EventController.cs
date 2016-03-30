@@ -19,14 +19,38 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /Event/
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, int? cateId, bool? status, DateTime? publicDate, string searchText = "")
         {
             if (!page.HasValue || page.Value < 1)
             {
                 page = 1;
             }
-            var lang = CultureHelper.GetCurrentCulture(true);
-            return View(_db.Event.Where(m => m.Lang == lang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
+            var list = _db.Event.Where(m => m.Lang == CurrentLang);
+            if (cateId.HasValue)
+            {
+                list = list.Where(m => m.CategoryId == cateId);
+            }
+            if (status.HasValue)
+            {
+                list = list.Where(m => m.IsActive == status.Value);
+            }
+            if (publicDate.HasValue)
+            {
+                list = list.Where(m => m.PublicDate.HasValue && m.PublicDate.Value.Year == publicDate.Value.Year
+                    && m.PublicDate.Value.Month == publicDate.Value.Month && m.PublicDate.Value.Day == publicDate.Value.Day);
+            }
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                searchText = searchText.ToLower();
+                list = list.Where(m => (!string.IsNullOrEmpty(m.Name) && m.Name.ToLower().Contains(searchText))
+                    || (!string.IsNullOrEmpty(m.Address) && m.Address.ToLower().Contains(searchText)));
+            }
+            ViewBag.categoryList = new SelectList(_db.Category.Where(m => m.Lang == CurrentLang), "Id", "Name", cateId);
+            ViewBag.status = status;
+            ViewBag.searchText = searchText;
+            ViewBag.publicDate = publicDate;
+            return View(list.OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /Event/Edit/5

@@ -1,14 +1,51 @@
 ﻿@model PagedList.IPagedList<StarMap.Models.Event>
 @using Resources
+@using StarMap.Utilities
 
 @{
     ViewBag.Title = Resources.EventList;
+    var lang = StarMap.Helpers.CultureHelper.GetCurrentCulture(true);
+    var format = lang.Equals("vi") ? "DD/MM/YYYY" : "MM/DD/YYYY";
 }
-
+<link href="/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 <h3 class="page-header">@ViewBag.Title</h3>
-<p>
-    @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
-</p>
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
+    </div>
+</div>
+<br />
+<div class="row filterBox">
+    @using (Html.BeginForm())
+    {
+        bool? status = ViewBag.status != null ? bool.Parse(ViewBag.status.ToString()) : null;
+        <div class="col-md-2">
+            <label>@Resources.Category</label>
+            @Html.DropDownList("cateId", ViewBag.categoryList as SelectList, Resources.All, new { Class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label>@Resources.Status</label>
+            <select name="status" class="form-control">
+                <option value="">@Resources.All</option>
+                <option value="true" @(status == true ? "selected" : "")>Active</option>
+                <option value="false" @(status == false ? "selected" : "")> Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>@Resources.EventDate</label>
+            <input type="text" name="publicDate" value="@Common.GetLocaleDateTime(ViewBag.publicDate, lang)" class="form-control" id="publicDate" />
+        </div>
+        <div class="col-md-3">
+            <label>@Resources.SearchText</label>
+            <input type="text" name="searchText" value="@ViewBag.searchText" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <label></label>
+            <input type="submit" name="submit" value="@Resources.Search" class="btn btn-primary" />
+        </div>
+    }
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -69,3 +106,17 @@
 
 </table>
 @Html.Partial("_Paging", Model)
+@section Scripts {
+    <script src="~/Scripts/moment-with-locales.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#publicDate').datetimepicker({
+                locale: '@lang',
+                format: '@format',
+                useCurrent: false,
+                showClear: true
+            });
+        });
+    </script>
+}

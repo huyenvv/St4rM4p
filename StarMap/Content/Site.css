@@ -61,10 +61,19 @@ footer {
     background: #101010;
     color: #999999;
 }
+
 #MainContent {
     padding-bottom: 31px;
 }
 
 .label-silver {
     background-color: #ddd;
+}
+
+.filterBox .btn {
+    margin-top: 4px;
+}
+
+.table .btn {
+    margin-bottom: 5px;
 }

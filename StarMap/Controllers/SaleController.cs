@@ -19,14 +19,47 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /Sale/
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, int? cateId, bool? status, bool? isHot, DateTime? startDate, DateTime? endDate, string searchText = "")
         {
             if (!page.HasValue || page.Value < 1)
             {
                 page = 1;
             }
-            var lang = CultureHelper.GetCurrentCulture(true);
-            return View(_db.Sale.Where(m => m.Lang == lang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
+            var list = _db.Sale.Where(m => m.Lang == CurrentLang);
+            if (cateId.HasValue)
+            {
+                list = list.Where(m => m.CategoryId == cateId);
+            }
+            if (status.HasValue)
+            {
+                list = list.Where(m => m.IsActive == status.Value);
+            }
+            if (isHot.HasValue)
+            {
+                list = list.Where(m => m.IsHot == isHot.Value);
+            }
+            if (startDate.HasValue)
+            {
+                list = list.Where(m => m.StartDate >= startDate);
+            }
+            if (endDate.HasValue)
+            {
+                list = list.Where(m => m.EndDate <= endDate);
+            }
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                searchText = searchText.ToLower();
+                list = list.Where(m => (!string.IsNullOrEmpty(m.Name) && m.Name.ToLower().Contains(searchText))
+                    || (!string.IsNullOrEmpty(m.Address) && m.Address.ToLower().Contains(searchText)));
+            }
+            ViewBag.categoryList = new SelectList(_db.Category.Where(m => m.Lang == CurrentLang), "Id", "Name", cateId);
+            ViewBag.status = status;
+            ViewBag.searchText = searchText;
+            ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
+            ViewBag.isHot = isHot;
+            return View(list.OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /Sale/Edit/5
@@ -81,7 +114,7 @@ namespace StarMap.Controllers
                 newSale.IsActive = Sale.IsActive;
                 newSale.Country = Sale.Country;
                 newSale.City = Sale.City;
-                
+
                 if (thumbImagePathFile != null)
                 {
                     string fileName = null;
@@ -122,9 +155,9 @@ namespace StarMap.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             var detailImage = Sale.DetailImage;
-            var thumbImage = Sale.ThumbImage;          
+            var thumbImage = Sale.ThumbImage;
 
             _db.Sale.Remove(Sale);
             await _db.SaveChangesAsync();

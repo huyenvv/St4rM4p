@@ -327,4 +327,13 @@
   <data name="SelectCountry" xml:space="preserve">
     <value>Chọn quốc gia</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>Nội dung tìm kiếm</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>- Tất cả -</value>
+  </data>
 </root>

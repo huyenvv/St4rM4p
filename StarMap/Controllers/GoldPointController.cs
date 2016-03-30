@@ -20,13 +20,36 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /GoldPoint/
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, int? cateId, bool? status, string rate = "", string searchText = "")
         {
             if (!page.HasValue || page.Value < 1)
             {
                 page = 1;
             }
-            return View(_db.GoldPoint.Where(m => m.Lang == CurrentLang).OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
+            var list = _db.GoldPoint.Where(m => m.Lang == CurrentLang);
+            if (cateId.HasValue)
+            {
+                list = list.Where(m => m.CategoryId == cateId);
+            }
+            if (status.HasValue)
+            {
+                list = list.Where(m => m.IsActive == status.Value);
+            }
+            if (!string.IsNullOrEmpty(rate))
+            {
+                list = list.Where(m => m.Rate == rate);
+            }
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                searchText = searchText.ToLower();
+                list = list.Where(m => (!string.IsNullOrEmpty(m.Name) && m.Name.ToLower().Contains(searchText))
+                    || (!string.IsNullOrEmpty(m.Address) && m.Address.ToLower().Contains(searchText)));
+            }
+            ViewBag.categoryList = new SelectList(_db.Category.Where(m => m.Lang == CurrentLang), "Id", "Name", cateId);
+            ViewBag.status = status;
+            ViewBag.rate = rate;
+            ViewBag.searchText = searchText;
+            return View(list.OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
         // GET: /GoldPoint/Edit/5

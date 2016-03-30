@@ -327,4 +327,13 @@
   <data name="SelectCountry" xml:space="preserve">
     <value>Select Country</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>Search Text</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>- All -</value>
+  </data>
 </root>
