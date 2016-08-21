@@ -1,13 +1,63 @@
 ﻿@model PagedList.IPagedList<StarMap.Models.Sale>
 @using Resources
+@using StarMap.Utilities
 
 @{
     ViewBag.Title = Resources.SaleList;
+    var lang = StarMap.Helpers.CultureHelper.GetCurrentCulture(true);
 }
+<link href="/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
 <h3 class="page-header">@ViewBag.Title</h3>
-<p>
-    @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
-</p>
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink(Resources.Create, "NewOrEdit", null, new { Class = "btn btn-primary" })
+    </div>
+</div>
+<br />
+<div class="row filterBox">
+    @using (Html.BeginForm())
+    {
+        bool? status = ViewBag.status != null ? bool.Parse(ViewBag.status.ToString()) : null;
+        bool? isHot = ViewBag.isHot != null ? bool.Parse(ViewBag.isHot.ToString()) : null;
+        <div class="col-md-2">
+            <label>@Resources.Category</label>
+            @Html.DropDownList("cateId", ViewBag.categoryList as SelectList, Resources.All, new { Class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            <label>@Resources.Status</label>
+            <select name="status" class="form-control">
+                <option value="">@Resources.All</option>
+                <option value="true" @(status == true ? "selected" : "")>Active</option>
+                <option value="false" @(status == false ? "selected" : "")> Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>Hot</label>
+            <select name="isHot" class="form-control">
+                <option value="">@Resources.All</option>
+                <option value="true" @(isHot == true ? "selected" : "")>Hot</option>
+                <option value="false" @(isHot == false ? "selected" : "")> Not Hot</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>@Resources.StartDate</label>
+            <input type="text" name="startDate" value="@Common.GetLocaleDateTime(ViewBag.startDate, lang)" class="form-control" id="startDate" />
+        </div>
+        <div class="col-md-2">
+            <label>@Resources.EndDate</label>
+            <input type="text" name="endDate" value="@Common.GetLocaleDateTime(ViewBag.endDate, lang)" class="form-control" id="endDate" />
+        </div>
+        <div class="col-md-3">
+            <label>@Resources.SearchText</label>
+            <input type="text" name="searchText" value="@ViewBag.searchText" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <label></label>
+            <input type="submit" name="submit" value="@Resources.Search" class="btn btn-primary" />
+        </div>
+    }
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -50,7 +100,7 @@
                 {
                     @Resources.Undefined
                 } -
-                <br/>
+                <br />
                 @if (item.EndDate.HasValue)
                 {
                     @Html.DisplayFor(modelItem => item.EndDate)
@@ -94,3 +144,30 @@
 
 </table>
 @Html.Partial("_Paging", Model)
+
+@section Scripts {
+    <script src="~/Scripts/moment-with-locales.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#endDate').datetimepicker({
+                locale: '@lang',
+                useCurrent: false,
+                showClear: true
+            });
+
+            $("#startDate").datetimepicker({
+                locale: '@lang',
+                useCurrent: false,
+                showClear: true
+            }).on("dp.change", function (e) {
+                var startDate = new Date(e.date);
+                var endDate = $('#endDate').data("DateTimePicker").date();
+                $('#endDate').data("DateTimePicker").minDate(e.date);
+                if (endDate < startDate) {
+                    $('#endDate').data("DateTimePicker").date(startDate);
+                }
+            });
+        });
+    </script>
+}

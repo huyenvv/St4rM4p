@@ -1,0 +1,314 @@
+﻿@model StarMap.Models.DashboardModel
+@using Resources;
+@{
+    ViewBag.Title = Resources.Dashboard;
+    var listLabel = new[] { "silver", "silver", "default", "success", "info", "warning" };
+}
+
+<style type="text/css">
+    table.table thead tr th {
+        background: #0094ff;
+        color: #ffffff;
+    }
+</style>
+
+<h3 class="page-header">@ViewBag.Title</h3>
+<div class="row">
+    <div class="col-md-4">
+        <hr />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.GoldPoint
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.GPCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.GPActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.GPInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.Rate (@Resources.Stars)
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GPRatingList)
+                {
+                    var rate = item.Key.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                    string label;
+                    try
+                    {
+                        label = listLabel[int.Parse(rate[0])];
+                    }
+                    catch (Exception)
+                    {
+                        label = listLabel[0];
+                    }
+                    <tr>
+                        <td class="text-center">
+                            <span class="label label-@label"> &nbsp;@item.Key <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GPCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <hr />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.Sale
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.Type
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        Hot
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleHotCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        New
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleNewCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SaleCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <hr />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.Event
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.EventCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.EventActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.EventInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EventCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />

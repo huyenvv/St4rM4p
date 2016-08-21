@@ -1,0 +1,20 @@
+﻿@model StarMap.Models.ImageModel
+@using Resources
+@{
+    var image = !string.IsNullOrEmpty(Model.ImagePath) ? Model.ImagePath : Url.Content("~/Upload/thumbnail-default.jpg");
+}
+<div class="fileinput fileinput-new" data-provides="fileinput">
+    <div class="fileinput-new thumbnail" style="width: 200px;">
+        <img src="@image" alt="Alternate Text" width="300" height="200" />
+    </div>
+    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px;
+                            max-height: 150px; line-height: 20px;">
+    </div>
+    <div>
+        <span class="btn btn-file btn-warning">
+            <span class="fileinput-new">@Resources.SelectImage</span> <span class="fileinput-exists">@Resources.Change</span>
+            <input type="file" name="@Model.ImageName" class="default" accept="image/*" />
+        </span>
+        <a href="#" class="btn fileinput-exists fileRequired" data-dismiss="fileinput">@Resources.Remove</a>
+    </div>
+</div>

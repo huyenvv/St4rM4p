@@ -1,0 +1,8 @@
+﻿@using Resources
+@if (Request.IsAuthenticated)
+{
+    <li><a href="@Url.Action("Index","Category")"> @Resources.Category</a></li>
+    <li><a href="@Url.Action("Index", "GoldPoint")"> @Resources.GoldPoint</a></li>
+    <li><a href="@Url.Action("Index", "Sale")"> @Resources.Sale</a></li>
+    <li><a href="@Url.Action("Index", "Event")"> @Resources.Event</a></li>
+}

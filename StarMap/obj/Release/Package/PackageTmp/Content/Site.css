@@ -1,0 +1,79 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+#admin-menu li a {
+    display: block;
+    text-decoration: none;
+}
+
+#admin-menu li.active a {
+    color: #fff;
+}
+
+#frmChangeLanguage {
+    max-width: 200px;
+    padding: 9px 0 0 10px;
+}
+
+footer {
+    border-top: 1px solid #eeeeee;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    line-height: 30px;
+    background: #101010;
+    color: #999999;
+}
+
+#MainContent {
+    padding-bottom: 31px;
+}
+
+.label-silver {
+    background-color: #ddd;
+}
+
+.filterBox .btn {
+    margin-top: 4px;
+}
+
+.table .btn {
+    margin-bottom: 5px;
+}

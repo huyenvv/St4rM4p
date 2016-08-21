@@ -59,7 +59,7 @@ namespace StarMap.Controllers
                         var content = new FormUrlEncodedContent(values);
                         var response = await client.PostAsync(uri, content);
                         var responseString = await response.Content.ReadAsStringAsync();
-                        return RedirectToAction("Index", "Category");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }
