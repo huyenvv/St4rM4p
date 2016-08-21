@@ -5,7 +5,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\huyen\Desktop</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\huyen\Desktop\Website</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -111,7 +111,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2016 14:56:34</publishTime>
     </File>
     <File Include="bin/StarMap.dll">
-      <publishTime>08/21/2016 14:56:37</publishTime>
+      <publishTime>08/21/2016 15:03:38</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>03/22/2016 22:48:48</publishTime>

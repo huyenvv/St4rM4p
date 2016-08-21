@@ -65,7 +65,7 @@
             var loginData = "UserName=" + $("#UserName").val() + "&Password=" + $("#Password").val();
             loginData = loginData + "&grant_type=password";
             $.post(tokenUrl, loginData).done(function (data) {
-                location.href = "@Url.Action("Index", "Category")";
+                location.href = "@Url.Action("Index", "Home")";
             }).fail(function (error) {
                 $("#pnlError").html('<div class="alert-danger alert">@Resources.LoginError</div>');
                 $btn.button('reset');
