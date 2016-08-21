@@ -1,0 +1,9 @@
+D:\PROJECTS\StarMap PRJ\Resources\bin\Release\Resources.dll
+D:\PROJECTS\StarMap PRJ\Resources\bin\Release\Resources.pdb
+D:\PROJECTS\StarMap PRJ\Resources\bin\Release\vi\Resources.resources.dll
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.Resources.resources
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.Resources.vi.resources
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.csproj.GenerateResource.Cache
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\vi\Resources.resources.dll
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.dll
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.pdb

@@ -336,4 +336,19 @@
   <data name="All" xml:space="preserve">
     <value>- Tất cả -</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tổng quan</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Tổng số</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Tình trạng</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Loại</value>
+  </data>
 </root>

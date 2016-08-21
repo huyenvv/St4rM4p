@@ -1,68 +1,314 @@
-﻿@model StarMap.Models.Person
+﻿@model StarMap.Models.DashboardModel
 @using Resources;
 @{
-    ViewBag.Title = Resources.AddPerson;
+    ViewBag.Title = Resources.Dashboard;
+    var listLabel = new[] { "silver", "silver", "default", "success", "info", "warning" };
 }
 
-<h2>@Resources.AddPerson</h2>
+<style type="text/css">
+    table.table thead tr th {
+        background: #0094ff;
+        color: #ffffff;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
+<h3 class="page-header">@ViewBag.Title</h3>
+<div class="row">
+    <div class="col-md-4">
         <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Age, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Age)
-                @Html.ValidationMessageFor(model => model.Age)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Biography, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Biography)
-                @Html.ValidationMessageFor(model => model.Biography)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Resources.Create" class="btn btn-default" />
-            </div>
-        </div>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.GoldPoint
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.GPCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.GPActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.GPInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.Rate (@Resources.Stars)
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GPRatingList)
+                {
+                    var rate = item.Key.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                    string label;
+                    try
+                    {
+                        label = listLabel[int.Parse(rate[0])];
+                    }
+                    catch (Exception)
+                    {
+                        label = listLabel[0];
+                    }
+                    <tr>
+                        <td class="text-center">
+                            <span class="label label-@label"> &nbsp;@item.Key <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GPCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-}
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="col-md-4">
+        <hr />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.Sale
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.Type
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        Hot
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleHotCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        New
+                    </td>
+                    <td class="text-center">
+                        @Model.SaleNewCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SaleCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <hr />
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        @Resources.Event
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Total
+                    </td>
+                    <td class="text-center">
+                        @Model.EventCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.State
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Active
+                    </td>
+                    <td class="text-center">
+                        @Model.EventActiveCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        @Resources.Inactive
+                    </td>
+                    <td class="text-center">
+                        @Model.EventInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr class="info">
+                    <th class="text-center">
+                        @Resources.Category
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EventCategoriesList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @item.Key
+                        </td>
+                        <td class="text-center">
+                            @item.Value
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />

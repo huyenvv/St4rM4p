@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -234,6 +235,7 @@
     <Compile Include="Models\CategoryModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Event.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
     </Compile>
@@ -243,6 +245,7 @@
     <Compile Include="Models\GeneralModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\GeneralObject.cs" />
     <Compile Include="Models\GoldPointModel.cs">
       <SubType>Code</SubType>
     </Compile>
