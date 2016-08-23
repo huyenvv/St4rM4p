@@ -7,7 +7,10 @@
     });
     $("ul#admin-menu li a").each(function () {
         var item = $(this);
-        if ((item.attr('href') + ' ').indexOf(getController() + ' ') != -1 || (item.attr('href') + '/').indexOf(getController() + '/') != -1 || (item.attr('href') + '?').indexOf(getController() + '?') != -1) {
+        if ((item.attr('href') + ' ').indexOf(getController() + ' ') != -1
+            || (item.attr('href') + '/').indexOf(getController() + '/') != -1
+            || (item.attr('href') + '?').indexOf(getController() + '?') != -1
+            || (item.attr('data-href') + '/').indexOf(getController() + '/') != -1) {
             item.parent().addClass('active');
         }
     });

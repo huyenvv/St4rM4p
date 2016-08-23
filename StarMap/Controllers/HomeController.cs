@@ -14,6 +14,7 @@ namespace StarMap.Controllers
         [CustomAuthorize]
         public ActionResult Index()
         {
+            var minDateForSaleIsNew = DateTime.Now.AddDays(-7).Date;
             var cates = _db.Category.Where(m => m.Lang == CurrentLang);
             var goldPoint = _db.GoldPoint.Where(m => m.Lang == CurrentLang);
             var sale = _db.Sale.Where(m => m.Lang == CurrentLang);
@@ -21,7 +22,7 @@ namespace StarMap.Controllers
 
             var dashboard = new DashboardModel();
             dashboard.GPCount = goldPoint.Count();
-            dashboard.GPActiveCount = goldPoint.Where(m => m.IsActive).Count();
+            dashboard.GPActiveCount = goldPoint.Count(m => m.IsActive);
             dashboard.GPInActiveCount = dashboard.GPCount - dashboard.GPActiveCount;
             dashboard.GPCategoriesList = cates.AsEnumerable().Select(m => new GeneralObject
             {
@@ -32,6 +33,17 @@ namespace StarMap.Controllers
             {
                 Key = m.Key,
                 Value = string.Format("{0}", m.Count())
+            }).OrderByDescending(m => m.Key).ToList();
+
+            dashboard.SaleCount = sale.Count();
+            dashboard.SaleActiveCount = sale.Count(m => m.IsActive);
+            dashboard.SaleInActiveCount = dashboard.SaleCount - dashboard.SaleActiveCount;
+            dashboard.SaleHotCount = sale.Count(m => m.IsHot.HasValue && m.IsHot.Value);
+            dashboard.SaleNewCount = sale.AsEnumerable().Count(m => m.EndDate.HasValue && m.EndDate.Value.Date >= minDateForSaleIsNew);
+            dashboard.SaleCategoriesList = cates.AsEnumerable().Select(m => new GeneralObject
+            {
+                Key = m.Name,
+                Value = string.Format("{0}", m.Sale.Count)
             }).ToList();
 
             dashboard.EventCount = eventList.Count();
@@ -41,17 +53,6 @@ namespace StarMap.Controllers
             {
                 Key = m.Name,
                 Value = string.Format("{0}", m.Event.Count)
-            }).ToList();
-
-            dashboard.SaleCount = sale.Count();
-            dashboard.SaleActiveCount = sale.Where(m => m.IsActive).Count();
-            dashboard.SaleInActiveCount = dashboard.SaleCount - dashboard.SaleActiveCount;
-            dashboard.SaleHotCount = sale.Where(m => m.IsHot.HasValue && m.IsHot.Value).Count();
-            //dashboard.SaleNewCount = 0;
-            dashboard.SaleCategoriesList = cates.AsEnumerable().Select(m => new GeneralObject
-            {
-                Key = m.Name,
-                Value = string.Format("{0}", m.Sale.Count)
             }).ToList();
 
             return View(dashboard);

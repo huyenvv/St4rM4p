@@ -1,6 +1,7 @@
 ﻿@using Resources
 @if (Request.IsAuthenticated)
 {
+    <li><a href="@Url.Action("Index","Home", new { area = "" })" class="navbar-brand" data-href="/Home/Index/"> @Resources.Dashboard</a></li>
     <li><a href="@Url.Action("Index","Category")"> @Resources.Category</a></li>
     <li><a href="@Url.Action("Index", "GoldPoint")"> @Resources.GoldPoint</a></li>
     <li><a href="@Url.Action("Index", "Sale")"> @Resources.Sale</a></li>
