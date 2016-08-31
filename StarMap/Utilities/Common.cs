@@ -23,20 +23,20 @@ namespace StarMap.Utilities
         }
         private static readonly string[] VietnameseSigns = new string[]
         {
-                        "aAeEoOuUiIdDyY",                        
-                        "áàạảãâấầậẩẫăắằặẳẵ",                        
-                        "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",                        
-                        "éèẹẻẽêếềệểễ",                        
-                        "ÉÈẸẺẼÊẾỀỆỂỄ",                        
-                        "óòọỏõôốồộổỗơớờợởỡ",                        
-                        "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",                        
-                        "úùụủũưứừựửữ",                        
-                        "ÚÙỤỦŨƯỨỪỰỬỮ",                        
-                        "íìịỉĩ",                        
-                        "ÍÌỊỈĨ",                        
-                        "đ",                        
-                        "Đ",                        
-                        "ýỳỵỷỹ",                        
+                        "aAeEoOuUiIdDyY",
+                        "áàạảãâấầậẩẫăắằặẳẵ",
+                        "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+                        "éèẹẻẽêếềệểễ",
+                        "ÉÈẸẺẼÊẾỀỆỂỄ",
+                        "óòọỏõôốồộổỗơớờợởỡ",
+                        "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+                        "úùụủũưứừựửữ",
+                        "ÚÙỤỦŨƯỨỪỰỬỮ",
+                        "íìịỉĩ",
+                        "ÍÌỊỈĨ",
+                        "đ",
+                        "Đ",
+                        "ýỳỵỷỹ",
                         "ÝỲỴỶỸ"
         };
 
@@ -295,10 +295,12 @@ namespace StarMap.Utilities
                 ThumbDescription = model.ThumbDescription,
                 ThumbImage = model.ThumbImage,
                 CategoryId = model.CategoryId,
-                PublicDate = model.PublicDate,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
                 IsActive = model.IsActive,
                 Country = model.Country,
-                City = model.City
+                City = model.City,
+                IsHot = model.IsHot
             };
         }
 

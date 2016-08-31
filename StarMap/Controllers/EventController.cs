@@ -19,7 +19,7 @@ namespace StarMap.Controllers
         private readonly StarMapEntities _db = new StarMapEntities();
 
         // GET: /Event/
-        public ActionResult Index(int? page, int? cateId, bool? status, DateTime? publicDate, string searchText = "")
+        public ActionResult Index(int? page, int? cateId, bool? status, bool? isHot, DateTime? startDate, DateTime? endDate, string searchText = "")
         {
             if (!page.HasValue || page.Value < 1)
             {
@@ -34,10 +34,19 @@ namespace StarMap.Controllers
             {
                 list = list.Where(m => m.IsActive == status.Value);
             }
-            if (publicDate.HasValue)
+
+            if (isHot.HasValue)
             {
-                list = list.Where(m => m.PublicDate.HasValue && m.PublicDate.Value.Year == publicDate.Value.Year
-                    && m.PublicDate.Value.Month == publicDate.Value.Month && m.PublicDate.Value.Day == publicDate.Value.Day);
+                list = list.Where(m => m.IsHot == isHot.Value);
+            }
+
+            if (startDate.HasValue)
+            {
+                list = list.Where(m => m.StartDate >= startDate);
+            }
+            if (endDate.HasValue)
+            {
+                list = list.Where(m => m.EndDate <= endDate);
             }
 
             if (!string.IsNullOrEmpty(searchText))
@@ -49,7 +58,9 @@ namespace StarMap.Controllers
             ViewBag.categoryList = new SelectList(_db.Category.Where(m => m.Lang == CurrentLang), "Id", "Name", cateId);
             ViewBag.status = status;
             ViewBag.searchText = searchText;
-            ViewBag.publicDate = publicDate;
+            ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
+            ViewBag.isHot = isHot;
             return View(list.OrderBy(m => m.Name).ToPagedList(page.Value, PageSize));
         }
 
@@ -78,7 +89,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,CategoryId,PublicDate,IsActive,Country,City")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,CategoryId,StartDate,EndDate,IsHot,IsActive,Country,City")] 
             EventModel even, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -98,8 +109,10 @@ namespace StarMap.Controllers
                 newEvent.Location = even.Location;
                 newEvent.ThumbDescription = even.ThumbDescription;
                 newEvent.DetailDescription = even.DetailDescription;
+                newEvent.IsHot = even.IsHot;
                 newEvent.CategoryId = even.CategoryId;
-                newEvent.PublicDate = even.PublicDate;
+                newEvent.StartDate = even.StartDate;
+                newEvent.EndDate = even.EndDate;
                 newEvent.IsActive = even.IsActive;
                 newEvent.Country = even.Country;
                 newEvent.City = even.City;

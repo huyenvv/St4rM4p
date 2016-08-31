@@ -49,6 +49,8 @@ namespace StarMap.Controllers
             dashboard.EventCount = eventList.Count();
             dashboard.EventActiveCount = eventList.Where(m => m.IsActive).Count();
             dashboard.EventInActiveCount = dashboard.EventCount - dashboard.EventActiveCount;
+            dashboard.EventHotCount = eventList.Count(m => m.IsHot.HasValue && m.IsHot.Value);
+            dashboard.EventNewCount = eventList.AsEnumerable().Count(m => m.EndDate.HasValue && m.EndDate.Value.Date >= minDateForSaleIsNew);
             dashboard.EventCategoriesList = cates.AsEnumerable().Select(m => new GeneralObject
             {
                 Key = m.Name,

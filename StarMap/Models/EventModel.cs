@@ -9,6 +9,8 @@ namespace StarMap.Models
     {
         public bool? IsHot { get; set; }
 
-        public DateTime? PublicDate { get; set; }
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
     }
 }

@@ -10,6 +10,10 @@
         background: #0094ff;
         color: #ffffff;
     }
+
+    table.table tbody tr td{
+        width: 50%;
+    }
 </style>
 
 @*<h3 class="page-header">@ViewBag.Title</h3>*@
@@ -89,14 +93,14 @@
                     {
                         label = listLabel[0];
                     }
-                    <tr>
-                        <td class="text-center">
-                            <span class="label label-@label"> &nbsp;@item.Key <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
-                        </td>
-                        <td class="text-center">
-                            @item.Value
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center">
+                        <span class="label label-@label"> &nbsp;@item.Key <i class="glyphicon glyphicon-star"></i>&nbsp;</span>
+                    </td>
+                    <td class="text-center">
+                        @item.Value
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -114,14 +118,14 @@
             <tbody>
                 @foreach (var item in Model.GPCategoriesList)
                 {
-                    <tr>
-                        <td class="text-center">
-                            @item.Key
-                        </td>
-                        <td class="text-center">
-                            @item.Value
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="text-center">
+                        @item.Key
+                    </td>
+                    <td class="text-center">
+                        @item.Value
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -280,6 +284,36 @@
                     </td>
                     <td class="text-center">
                         @Model.EventInActiveCount
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        @Resources.Type
+                    </th>
+                    <th class="text-center">
+                        @Resources.Count
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        Hot
+                    </td>
+                    <td class="text-center">
+                        @Model.EventHotCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        New
+                    </td>
+                    <td class="text-center">
+                        @Model.EventNewCount
                     </td>
                 </tr>
             </tbody>

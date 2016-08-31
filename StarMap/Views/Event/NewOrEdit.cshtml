@@ -52,8 +52,20 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <label for="PublicDate">@Resources.EventDate</label>
-            <input type="text" name="PublicDate" value="@Common.GetLocaleDateTime(Model.PublicDate, lang)" class="typeDate form-control" />
+            <label for="StartDate">@Resources.StartDate</label>
+            <input type="text" name="StartDate" value="@Common.GetLocaleDateTime(Model.StartDate, lang)" id="startDate" class="typeDate form-control" />
+        </div>
+        <div class="col-sm-6">
+            <label for="EndDate">@Resources.EndDate</label>
+            <input type="text" name="EndDate" value="@Common.GetLocaleDateTime(Model.EndDate, lang)" id="endDate" class="typeDate form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <br />
+            <label for="IsHot">@Html.CheckBox("IsHot", Model.IsHot ?? false) Is Hot</label>
+            @Html.ValidationMessageFor(model => model.IsHot)
         </div>
         <div class="col-sm-6">
             <label for="Mobile">@Resources.Mobile</label>
@@ -67,10 +79,10 @@
             <label for="ThumbImage">@Resources.ThumbImage</label>
             <div class="form-group">
                 @Html.Partial("_ShowImage", new ImageModel
-                {
-                    ImagePath = Model.ThumbImage,
-                    ImageName = "thumbImagePathFile"
-                })
+           {
+               ImagePath = Model.ThumbImage,
+               ImageName = "thumbImagePathFile"
+           })
             </div>
             @Html.ValidationMessageFor(model => model.ThumbImage)
         </div>
@@ -78,10 +90,10 @@
             <label for="DetailImage">@Resources.DetailImage</label>
             <div class="form-group">
                 @Html.Partial("_ShowImage", new ImageModel
-                {
-                    ImagePath = Model.DetailImage,
-                    ImageName = "detailImagePathFile"
-                })
+           {
+               ImagePath = Model.DetailImage,
+               ImageName = "detailImagePathFile"
+           })
             </div>
             @Html.ValidationMessageFor(model => model.DetailImage)
         </div>
@@ -130,14 +142,28 @@
             @if (!string.IsNullOrEmpty(Model.Country))
             {
             @:printState("City", getStateIndex('@Model.Country'));
-                                    @:$("#Country").val('@Model.Country');
-                                                }
+                                                            @:$("#Country").val('@Model.Country');
+                                                                        }
             @if (!string.IsNullOrEmpty(Model.City))
             {
             @:$("#City").val('@Model.City');
-                                                }
-            $('.typeDate').datetimepicker({
-                locale: '@lang'
+                                                                        }
+
+            $('#endDate').datetimepicker({
+                locale: '@lang',
+                useCurrent: false,
+            });
+
+            $("#startDate").datetimepicker({
+                locale: '@lang',
+                useCurrent: false,
+            }).on("dp.change", function (e) {
+                var startDate = new Date(e.date);
+                var endDate = $('#endDate').data("DateTimePicker").date();
+                $('#endDate').data("DateTimePicker").minDate(e.date);
+                if (endDate < startDate) {
+                    $('#endDate').data("DateTimePicker").date(startDate);
+                }
             });
         });
     </script>

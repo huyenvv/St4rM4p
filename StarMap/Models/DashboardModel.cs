@@ -15,7 +15,9 @@ namespace StarMap.Models
 
         public int EventCount { get; set; }
         public int EventActiveCount { get; set; }
-        public int EventInActiveCount { get; set; }        
+        public int EventInActiveCount { get; set; }
+        public int EventHotCount { get; set; }
+        public int EventNewCount { get; set; }
         public List<GeneralObject> EventCategoriesList { get; set; }
 
         public int SaleCount { get; set; }

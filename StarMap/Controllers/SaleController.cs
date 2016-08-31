@@ -88,12 +88,12 @@ namespace StarMap.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,IsHot,CategoryId,StartDate,EndDate,IsActive,Country,City")] 
-            SaleModel Sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
+            SaleModel sale, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
             {
 
-                var newSale = _db.Sale.FirstOrDefault(m => m.Id == Sale.Id);
+                var newSale = _db.Sale.FirstOrDefault(m => m.Id == sale.Id);
                 if (newSale == null) newSale = new Sale
                 {
                     CreateDate = DateTime.Now,
@@ -101,19 +101,19 @@ namespace StarMap.Controllers
                     Lang = CultureHelper.GetCurrentCulture(true)
                 };
 
-                newSale.Name = Sale.Name;
-                newSale.Address = Sale.Address;
-                newSale.Mobile = Sale.Mobile;
-                newSale.Location = Sale.Location;
-                newSale.ThumbDescription = Sale.ThumbDescription;
-                newSale.DetailDescription = Sale.DetailDescription;
-                newSale.IsHot = Sale.IsHot;
-                newSale.CategoryId = Sale.CategoryId;
-                newSale.StartDate = Sale.StartDate;
-                newSale.EndDate = Sale.EndDate;
-                newSale.IsActive = Sale.IsActive;
-                newSale.Country = Sale.Country;
-                newSale.City = Sale.City;
+                newSale.Name = sale.Name;
+                newSale.Address = sale.Address;
+                newSale.Mobile = sale.Mobile;
+                newSale.Location = sale.Location;
+                newSale.ThumbDescription = sale.ThumbDescription;
+                newSale.DetailDescription = sale.DetailDescription;
+                newSale.IsHot = sale.IsHot;
+                newSale.CategoryId = sale.CategoryId;
+                newSale.StartDate = sale.StartDate;
+                newSale.EndDate = sale.EndDate;
+                newSale.IsActive = sale.IsActive;
+                newSale.Country = sale.Country;
+                newSale.City = sale.City;
 
                 if (thumbImagePathFile != null)
                 {
@@ -128,7 +128,7 @@ namespace StarMap.Controllers
                     newSale.DetailImage = fileName;
                 }
 
-                if (Sale.Id == 0)
+                if (sale.Id == 0)
                 {
                     _db.Sale.Add(newSale);
                 }
@@ -140,7 +140,7 @@ namespace StarMap.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();
-            return View(Sale);
+            return View(sale);
         }
 
         // GET: /Sale/Delete/5
