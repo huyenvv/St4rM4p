@@ -7,3 +7,4 @@ D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.csproj.GenerateResource.
 D:\PROJECTS\StarMap PRJ\Resources\obj\Release\vi\Resources.resources.dll
 D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.dll
 D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.pdb
+D:\PROJECTS\StarMap PRJ\Resources\obj\Release\Resources.csprojResolveAssemblyReference.cache

@@ -108,10 +108,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/22/2016 22:48:53</publishTime>
     </File>
     <File Include="bin/Resources.dll">
-      <publishTime>09/01/2016 00:12:35</publishTime>
+      <publishTime>09/13/2016 23:43:24</publishTime>
     </File>
     <File Include="bin/StarMap.dll">
-      <publishTime>09/01/2016 00:28:13</publishTime>
+      <publishTime>09/13/2016 23:43:31</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>03/22/2016 22:48:48</publishTime>
@@ -147,7 +147,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/22/2016 22:48:50</publishTime>
     </File>
     <File Include="bin/vi/Resources.resources.dll">
-      <publishTime>09/01/2016 00:12:35</publishTime>
+      <publishTime>09/13/2016 23:43:25</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>03/22/2016 22:48:54</publishTime>

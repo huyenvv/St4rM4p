@@ -41,7 +41,9 @@ namespace StarMap.Controllers
             return new
             {
                 totalPage = ((count - 1) / PageSize) + 1,
-                data = count > 0 ? data.Skip(start).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() : new List<GoldPointModel>()
+                data = count > 0 
+                    ? data.Skip(start).OrderByDescending(m=>m.Rate).Take(PageSize).Select(m => m.ToGoldPointModel()).ToList() 
+                    : new List<GoldPointModel>()
             };
         }
 
