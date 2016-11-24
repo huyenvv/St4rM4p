@@ -12,7 +12,7 @@ namespace StarMap.Controllers
         // GET api/CategoryApi/GetAll
         public List<CategoryModel> GetAll(string lang)
         {
-            var data = _db.Category.Where(m => m.Lang.ToLower() == lang.ToLower()).ToList();
+            var data = _db.Category.Where(m => m.Lang.ToLower() == lang.ToLower()).OrderBy(m => m.Name).ToList();
             return data.Count > 0 ? data.Select(m => m.ToCategoryModel()).ToList() : new List<CategoryModel>();
         }
         protected override void Dispose(bool disposing)
