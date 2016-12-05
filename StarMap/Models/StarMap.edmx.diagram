@@ -7,16 +7,16 @@
       <Diagram DiagramId="52dba4d499914d5899b1b98f10ef23e5" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="StarMapModel.AspNetUsers" Width="1.5" PointX="3.25" PointY="0.5" />
         <EntityTypeShape EntityType="StarMapModel.Category" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="StarMapModel.GoldPoint" Width="1.5" PointX="9.625" PointY="0.75" />
-        <EntityTypeShape EntityType="StarMapModel.Sale" Width="1.5" PointX="9.625" PointY="6.625" />
+        <EntityTypeShape EntityType="StarMapModel.Event" Width="1.5" PointX="9.625" PointY="0.75" />
+        <EntityTypeShape EntityType="StarMapModel.GoldPoint" Width="1.5" PointX="12.625" PointY="0.875" />
+        <EntityTypeShape EntityType="StarMapModel.Sale" Width="1.5" PointX="9.625" PointY="6.75" />
+        <AssociationConnector Association="StarMapModel.FK_Event_AspNetUsers" />
         <AssociationConnector Association="StarMapModel.FK_GoldPoint_AspNetUsers" />
         <AssociationConnector Association="StarMapModel.FK_Sale_AspNetUsers" />
+        <AssociationConnector Association="StarMapModel.FK_Event_Category" />
         <AssociationConnector Association="StarMapModel.FK_GoldPoint_Category" />
         <AssociationConnector Association="StarMapModel.FK_Sale_Category" />
-        <EntityTypeShape EntityType="StarMapModel.Event" Width="1.5" PointX="12.625" PointY="0.75" />
-        <AssociationConnector Association="StarMapModel.FK_Event_AspNetUsers" />
-        <AssociationConnector Association="StarMapModel.FK_Event_Category" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

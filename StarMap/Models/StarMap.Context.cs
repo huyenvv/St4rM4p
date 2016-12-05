@@ -27,8 +27,8 @@ namespace StarMap.Models
     
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<GoldPoint> GoldPoint { get; set; }
         public virtual DbSet<Sale> Sale { get; set; }
-        public virtual DbSet<Event> Event { get; set; }
     }
 }

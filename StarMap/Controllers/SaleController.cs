@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System.Data.Entity.Validation;
 
 namespace StarMap.Controllers
 {
@@ -136,7 +137,24 @@ namespace StarMap.Controllers
                 {
                     _db.Entry(newSale).State = EntityState.Modified;
                 }
-                await _db.SaveChangesAsync();
+
+                try
+                {
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                }                
                 return RedirectToAction("Index");
             }
             ViewBag.Category = _db.Category.Where(m => m.Lang == CurrentLang).ToList();

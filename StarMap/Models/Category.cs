@@ -16,9 +16,9 @@ namespace StarMap.Models
     {
         public Category()
         {
+            this.Event = new HashSet<Event>();
             this.GoldPoint = new HashSet<GoldPoint>();
             this.Sale = new HashSet<Sale>();
-            this.Event = new HashSet<Event>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace StarMap.Models
         public string Image { get; set; }
         public string Lang { get; set; }
     
+        public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<GoldPoint> GoldPoint { get; set; }
         public virtual ICollection<Sale> Sale { get; set; }
-        public virtual ICollection<Event> Event { get; set; }
     }
 }
