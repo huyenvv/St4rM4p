@@ -68,3 +68,5 @@ D:\PROJECTS\StarMap PRJ\StarMap\obj\Debug\StarMap.csprojResolveAssemblyReference
 D:\PROJECTS\StarMap PRJ\StarMap\obj\Debug\StarMap.dll
 D:\PROJECTS\StarMap PRJ\StarMap\obj\Debug\StarMap.pdb
 D:\PROJECTS\StarMap PRJ\StarMap\bin\StarMap.pdb
+D:\PROJECTS\StarMap PRJ\StarMap\bin\DotNetZip.dll
+D:\PROJECTS\StarMap PRJ\StarMap\bin\DotNetZip.xml

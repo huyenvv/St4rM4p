@@ -412,6 +412,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File CSV contains data.
+        /// </summary>
+        public static string ImportCsvFileName {
+            get {
+                return ResourceManager.GetString("ImportCsvFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File ZIP contains images.
+        /// </summary>
+        public static string ImportImagesFile {
+            get {
+                return ResourceManager.GetString("ImportImagesFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inactive.
         /// </summary>
         public static string Inactive {

@@ -351,4 +351,13 @@
   <data name="Type" xml:space="preserve">
     <value>Loại</value>
   </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="ImportCsvFileName" xml:space="preserve">
+    <value>File CSV chứa nội dung</value>
+  </data>
+  <data name="ImportImagesFile" xml:space="preserve">
+    <value>File ZIP chứa danh sách ảnh</value>
+  </data>
 </root>

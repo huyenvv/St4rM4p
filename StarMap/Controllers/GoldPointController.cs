@@ -9,8 +9,11 @@ using StarMap.Helpers;
 using StarMap.Models;
 using StarMap.Utilities;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using PagedList;
+using System.Collections.Generic;
+using System.IO;
+using Ionic.Zip;
+using Microsoft.VisualBasic.FileIO;
 
 namespace StarMap.Controllers
 {
@@ -77,7 +80,7 @@ namespace StarMap.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,Rate,CategoryId,IsActive,Country,City")] 
+        public async Task<ActionResult> NewOrEdit([Bind(Include = "Id,Name,Address,Mobile,Location,ThumbImage,DetailImage,ThumbDescription,DetailDescription,Rate,CategoryId,IsActive,Country,City")]
             GoldPointModel goldPoint, HttpPostedFileBase thumbImagePathFile, HttpPostedFileBase detailImagePathFile)
         {
             if (ModelState.IsValid)
@@ -153,6 +156,134 @@ namespace StarMap.Controllers
             FileUpload.RemoveFile(detailImage);
             FileUpload.RemoveFile(thumbImage);
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Import(HttpPostedFileBase csvFile = null, HttpPostedFileBase imagesZipFiles = null)
+        {
+            if (csvFile.ContentLength > 0 && imagesZipFiles.ContentLength > 0)
+            {
+                string csvFileName = Path.GetFileName(csvFile.FileName);
+                string pathcsvFile = Path.Combine(Server.MapPath("~/App_Data/"), csvFileName);
+
+                string imagesZipFilesName = Path.GetFileName(imagesZipFiles.FileName);
+                string pathimagesZipFile = Path.Combine(Server.MapPath("~/App_Data/"), imagesZipFilesName);
+
+                // Create Folder For Unzip
+                var folderPathRelative = FileUpload.ROOT + DateTime.Now.ToString("/yyyy/MM/ddHHmmss");
+                string folderFileImagesPath = Server.MapPath(folderPathRelative);
+                if (!Directory.Exists(folderFileImagesPath))
+                {
+                    Directory.CreateDirectory(folderFileImagesPath);
+                }
+
+                try
+                {
+                    csvFile.SaveAs(pathcsvFile);
+                    imagesZipFiles.SaveAs(pathimagesZipFile);
+
+                    // Read CSV
+                    List<GoldPoint> list = new List<GoldPoint>();
+
+
+                    TextFieldParser parser = new TextFieldParser(pathcsvFile);
+
+                    parser.HasFieldsEnclosedInQuotes = true;
+                    parser.SetDelimiters(",");
+
+                    string[] columns;
+
+                    var now = DateTime.Now;
+                    var errorLines = new List<int>();
+                    var count = 0;
+
+                    while (!parser.EndOfData)
+                    {
+                        count++;
+                        columns = parser.ReadFields();
+                        if (columns.Length != 14)
+                        {
+                            if (count > 1)
+                                errorLines.Add(count);
+                            continue;
+                        }
+
+                        var cateName = columns[9];
+                        var category = _db.Category.FirstOrDefault(m => m.Name.ToLower() == cateName);
+                        if (category == null)
+                        {
+                            if (count > 1)
+                                errorLines.Add(count);
+                            continue;
+                        }
+
+                        var isActive = columns[13] == "1" ? true : false;
+
+                        list.Add(new GoldPoint
+                        {
+                            Name = columns[0],
+                            Address = columns[1],
+                            Mobile = columns[2],
+                            Location = columns[3],
+                            ThumbImage = folderPathRelative + "/" + columns[4],
+                            DetailImage = folderPathRelative + "/" + columns[5],
+                            ThumbDescription = columns[6],
+                            DetailDescription = columns[7],
+                            Rate = columns[8],
+                            CategoryId = category.Id,
+                            Lang = columns[10],
+                            City = columns[11],
+                            Country = columns[12],
+                            IsActive = isActive,
+                            CreateDate = now,
+                            CreatedBy = User.Identity.GetUserId()
+
+                        });
+                    }
+
+                    parser.Close();
+
+                    // Save to Database
+                    _db.GoldPoint.AddRange(list);
+                    var rowsAffect = _db.SaveChanges();
+
+                    // Unzip
+                    using (ZipFile zip = ZipFile.Read(pathimagesZipFile))
+                    {
+                        foreach (ZipEntry e in zip)
+                        {
+                            e.Extract(folderFileImagesPath);
+                        }
+                    }
+
+                    // delete zip
+                    System.IO.File.Delete(pathimagesZipFile);
+
+                    // Delete File
+                    System.IO.File.Delete(pathcsvFile);
+
+                    ViewBag.Success = rowsAffect.ToString();
+                    ViewBag.ErrorRows = string.Join(",", errorLines);
+                }
+                catch (Exception ex)
+                {
+                    //Delete Folder Unzip
+                    Directory.Delete(folderFileImagesPath);
+
+                    ViewBag.Feedback = ex.Message;
+                }
+            }
+            else
+            {
+                ViewBag.Feedback = "Please select a file";
+            }
+            return View();
         }
 
         protected override void Dispose(bool disposing)
