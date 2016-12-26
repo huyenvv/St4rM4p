@@ -1,0 +1,103 @@
+﻿@using Resources
+
+@{
+    ViewBag.Title = Resources.Import;
+}
+
+<link href="~/Content/FileInput.css" rel="stylesheet" />
+<h3 class="page-header">
+    @ViewBag.Title    
+</h3>
+
+<p>
+    @Html.ActionLink("Download Template", "GetTemplate")
+</p>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    if (ViewBag.Feedback != null && ViewBag.Feedback != "")
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            @ViewBag.Feedback
+        </div>
+    }
+    if (ViewBag.Success != null && ViewBag.Success != "")
+    {
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Import Succesfully:</span>
+            Total rows Succesfully: @ViewBag.Success
+        </div>
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Rows error: @ViewBag.ErrorRows
+        </div>
+    }
+
+    <div class="form-group">
+        <label for="csvFile">@Resources.ImportCsvFileName</label>
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <span class="input-group-addon btn btn-default btn-file">
+                <span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                <input type="file" name="csvFile" accept=".csv" />
+            </span>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Address">@Resources.ImportImagesFile</label>
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+            <span class="input-group-addon btn btn-default btn-file">
+                <span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
+                <input type="file" name="imagesZipFiles" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" />
+            </span>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <input type="submit" value="@Resources.Import" class="btn btn-primary" />
+        @Html.ActionLink(Resources.Back, "Index", null, new { Class = "btn btn-default" })
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/fileInput.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input[name=csvFile]").change(function () {
+                var filename = $(this).val();
+                var extension = filename.replace(/^.*\./, '');
+
+                if (extension != 'csv') {
+                    alert("Invalid csv extension");
+                    $(this).val('');
+                }
+            });
+
+            $("input[name=imagesZipFiles]").change(function () {
+                var filename = $(this).val();
+                var extension = filename.replace(/^.*\./, '');
+
+                if (extension != 'zip') {
+                    alert("Invalid zip extension");
+                    $(this).val('');
+                }
+            });
+
+            $("input[type=submit]").click(function () {
+                if ($("input[name=csvFile]").val() == "" || $("input[name=imagesZipFiles]").val() == "") {
+                    alert("Empty input file");
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
+}

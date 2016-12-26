@@ -22,6 +22,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Event">
+      <EntityTypeMapping TypeName="StarMapModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Lang" ColumnName="Lang" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
+          <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
+          <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
+          <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="GoldPoint">
       <EntityTypeMapping TypeName="StarMapModel.GoldPoint">
         <MappingFragment StoreEntitySet="GoldPoint">
@@ -59,31 +84,6 @@
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="IsHot" ColumnName="IsHot" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
-          <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
-          <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />
-          <ScalarProperty Name="ThumbImage" ColumnName="ThumbImage" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Event">
-      <EntityTypeMapping TypeName="StarMapModel.Event">
-        <MappingFragment StoreEntitySet="Event">
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="IsHot" ColumnName="IsHot" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Lang" ColumnName="Lang" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="DetailDescription" ColumnName="DetailDescription" />
           <ScalarProperty Name="ThumbDescription" ColumnName="ThumbDescription" />
           <ScalarProperty Name="DetailImage" ColumnName="DetailImage" />

@@ -286,6 +286,12 @@ namespace StarMap.Controllers
             return View();
         }
 
+        public FileResult GetTemplate()
+        {
+            var filePath = Server.MapPath("~\\App_Data\\Template\\GoldPoint.csv");
+            return File(filePath, "text/csv", "template_goldpoint.csv");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

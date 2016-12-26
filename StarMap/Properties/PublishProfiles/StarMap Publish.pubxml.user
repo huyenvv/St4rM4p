@@ -8,6 +8,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\Users\huyen\Desktop\Website</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_Data/Template/GoldPoint.csv">
+      <publishTime>12/17/2016 01:16:35</publishTime>
+    </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>12/06/2015 01:03:56</publishTime>
     </File>
@@ -50,11 +53,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/22/2016 22:48:43</publishTime>
     </File>
+    <File Include="bin/DotNetZip.dll">
+      <publishTime>06/22/2016 21:31:52</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>03/22/2016 22:48:45</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>03/22/2016 22:48:44</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>03/22/2016 22:48:46</publishTime>
@@ -108,10 +114,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/22/2016 22:48:53</publishTime>
     </File>
     <File Include="bin/Resources.dll">
-      <publishTime>09/13/2016 23:43:24</publishTime>
+      <publishTime>12/27/2016 01:03:22</publishTime>
     </File>
     <File Include="bin/StarMap.dll">
-      <publishTime>09/13/2016 23:43:31</publishTime>
+      <publishTime>12/27/2016 01:03:24</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>03/22/2016 22:48:48</publishTime>
@@ -147,7 +153,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/22/2016 22:48:50</publishTime>
     </File>
     <File Include="bin/vi/Resources.resources.dll">
-      <publishTime>09/13/2016 23:43:25</publishTime>
+      <publishTime>12/27/2016 01:03:22</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>03/22/2016 22:48:54</publishTime>
@@ -192,10 +198,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2015 01:03:56</publishTime>
     </File>
     <File Include="Models/StarMap.edmx.diagram">
-      <publishTime>08/31/2016 23:32:31</publishTime>
+      <publishTime>12/05/2016 23:40:10</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/23/2016 00:56:41</publishTime>
+      <publishTime>12/10/2016 00:05:57</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datetimepicker.js">
       <publishTime>12/24/2015 00:53:48</publishTime>
@@ -294,13 +300,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/21/2016 20:19:58</publishTime>
     </File>
     <File Include="Views/Event/Index.cshtml">
-      <publishTime>08/31/2016 23:39:35</publishTime>
+      <publishTime>12/09/2016 22:48:18</publishTime>
     </File>
     <File Include="Views/Event/NewOrEdit.cshtml">
-      <publishTime>08/31/2016 23:29:24</publishTime>
+      <publishTime>12/09/2016 23:32:21</publishTime>
+    </File>
+    <File Include="Views/GoldPoint/Import.cshtml">
+      <publishTime>12/27/2016 01:02:07</publishTime>
     </File>
     <File Include="Views/GoldPoint/Index.cshtml">
-      <publishTime>08/23/2016 22:25:47</publishTime>
+      <publishTime>12/09/2016 22:48:10</publishTime>
     </File>
     <File Include="Views/GoldPoint/NewOrEdit.cshtml">
       <publishTime>01/21/2016 23:06:24</publishTime>
@@ -312,7 +321,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/31/2016 21:15:41</publishTime>
     </File>
     <File Include="Views/Sale/Index.cshtml">
-      <publishTime>08/31/2016 23:37:04</publishTime>
+      <publishTime>12/09/2016 22:48:25</publishTime>
     </File>
     <File Include="Views/Sale/NewOrEdit.cshtml">
       <publishTime>08/31/2016 23:28:49</publishTime>
@@ -348,7 +357,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2015 01:03:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/21/2016 14:56:40</publishTime>
+      <publishTime>12/27/2016 01:03:26</publishTime>
     </File>
   </ItemGroup>
 </Project>
