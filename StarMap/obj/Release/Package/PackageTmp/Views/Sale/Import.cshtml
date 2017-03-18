@@ -1,12 +1,12 @@
 ﻿@using Resources
 
 @{
-    ViewBag.Title = Resources.Import + " " + Resources.GoldPoint;
+    ViewBag.Title = Resources.Import + " " + Resources.Sale;
 }
 
 <link href="~/Content/FileInput.css" rel="stylesheet" />
 <h3 class="page-header">
-    @ViewBag.Title
+    @ViewBag.Title    
 </h3>
 
 <p>
@@ -34,7 +34,7 @@
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
-            @Html.Raw(ViewBag.ErrorRows)
+            Rows error: @ViewBag.ErrorRows
         </div>
     }
 

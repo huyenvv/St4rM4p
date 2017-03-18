@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using Ionic.Zip;
 using Microsoft.VisualBasic.FileIO;
+using System.Text.RegularExpressions;
 
 namespace StarMap.Controllers
 {
@@ -200,7 +201,7 @@ namespace StarMap.Controllers
                     string[] columns;
 
                     var now = DateTime.Now;
-                    var errorLines = new List<int>();
+                    var errors = new List<ImportErrorModel>();
                     var count = 0;
 
                     while (!parser.EndOfData)
@@ -210,7 +211,7 @@ namespace StarMap.Controllers
                         if (columns.Length != 14)
                         {
                             if (count > 1)
-                                errorLines.Add(count);
+                                errors.Add(new ImportErrorModel { Line = 0, Message = "Template format is not supported!" });
                             continue;
                         }
 
@@ -219,8 +220,24 @@ namespace StarMap.Controllers
                         if (category == null)
                         {
                             if (count > 1)
-                                errorLines.Add(count);
+                                errors.Add(new ImportErrorModel { Line = count, Message = "Category incorrect" });
                             continue;
+                        }
+
+                        var location = columns[3];
+                        Regex regexIsLocation = new Regex(@"^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$");
+                        if (!regexIsLocation.IsMatch(location))
+                        {
+                            if (count > 1)
+                                errors.Add(new ImportErrorModel { Line = count, Message = "Location format incorrect" });
+                            continue;
+                        }
+
+                        var mobile = columns[2];
+                        Regex regexIsMobile = new Regex(@"^(\+\s?)?((?<!\+.*)\(\+?\d+([\s\-\.]?\d+)?\)|\d+)([\s\-\.]?(\(\d+([\s\-\.]?\d+)?\)|\d+))*(\s?(x|ext\.?)\s?\d+)?$");
+                        if (!regexIsMobile.IsMatch(mobile))
+                        {
+                            mobile = string.Empty;
                         }
 
                         var isActive = columns[13] == "1" ? true : false;
@@ -229,8 +246,8 @@ namespace StarMap.Controllers
                         {
                             Name = columns[0],
                             Address = columns[1],
-                            Mobile = columns[2],
-                            Location = columns[3],
+                            Mobile = mobile,
+                            Location = location,
                             ThumbImage = folderPathRelative + "/" + columns[4],
                             DetailImage = folderPathRelative + "/" + columns[5],
                             ThumbDescription = columns[6],
@@ -269,7 +286,7 @@ namespace StarMap.Controllers
                     System.IO.File.Delete(pathcsvFile);
 
                     ViewBag.Success = rowsAffect.ToString();
-                    ViewBag.ErrorRows = string.Join(",", errorLines);
+                    ViewBag.ErrorRows = Common.BuildErrorImportMessage(errors);
                 }
                 catch (Exception ex)
                 {
@@ -289,7 +306,7 @@ namespace StarMap.Controllers
         public FileResult GetTemplate()
         {
             var filePath = Server.MapPath("~\\App_Data\\Template\\GoldPoint.csv");
-            return File(filePath, "text/csv", "template_goldpoint.csv");
+            return File(filePath, "text/csv", "template_starplaces.csv");
         }
 
         protected override void Dispose(bool disposing)

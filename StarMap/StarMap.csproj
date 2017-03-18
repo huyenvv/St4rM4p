@@ -257,6 +257,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\ImportErrorModel.cs" />
     <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Models\GoldPoint.cs">
       <DependentUpon>StarMap.tt</DependentUpon>
@@ -338,6 +339,8 @@
       <DependentUpon>StarMap.edmx</DependentUpon>
     </Content>
     <Content Include="App_Data\Template\GoldPoint.csv" />
+    <Content Include="App_Data\Template\Event.csv" />
+    <Content Include="App_Data\Template\Sale.csv" />
     <None Include="Properties\PublishProfiles\StarMap Publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fileInput.js" />
@@ -411,6 +414,8 @@
     <Content Include="Views\Shared\_CheckFileImageExtension.cshtml" />
     <Content Include="Views\Shared\_Paging.cshtml" />
     <Content Include="Views\GoldPoint\Import.cshtml" />
+    <Content Include="Views\Event\Import.cshtml" />
+    <Content Include="Views\Sale\Import.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

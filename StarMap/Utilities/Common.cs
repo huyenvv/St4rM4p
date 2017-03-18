@@ -239,6 +239,28 @@ namespace StarMap.Utilities
                 return date.Value.ToString("yyyy/MM/dd HH:mm");
             return DateTime.Now.ToString("yyyy/MM/dd 00:00:00");
         }
+
+        public static DateTime? ConvertToDate(string dateString)
+        {
+            try
+            {
+                return DateTime.Parse(dateString);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static string BuildErrorImportMessage(List<ImportErrorModel> list)
+        {
+            string errorMessage = string.Empty;
+            foreach (var item in list)
+            {
+                errorMessage += string.Format("Line {0}: {1}<br />", item.Line, item.Message);
+            }
+            return errorMessage;
+        }
     }
     public static class Cultures
     {
